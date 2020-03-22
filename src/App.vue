@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col w-full">
-    <Nav style="margin-bottom: 60px" :data="selectedComponents" />
+    <Navigation style="margin-bottom: 60px" :data="selectedComponents" />
     <div v-for="section in data.sections" :key="section.title" :id="section.id">
       <Hero v-if="section.type == 'hero'" :baseUrl="data.baseUrl" :custom="section" />
       <Contribute v-if="section.type == 'contribute'" :baseUrl="data.baseUrl" :custom="section" />
@@ -37,7 +37,7 @@ import Form from "@/components/Form.vue";
 import Hero from "@/components/Hero.vue";
 import HowItWorks from "@/components/HowItWorks.vue";
 import Mission from "@/components/Mission.vue";
-import Nav from "@/components/Navigation.vue";
+import Navigation from "@/components/Navigation.vue";
 import Partners from "@/components/Partners.vue";
 import People from "@/components/People.vue";
 import Share from "@/components/Share.vue";
@@ -62,7 +62,7 @@ export default {
     Hero,
     HowItWorks,
     Mission,
-    Nav,
+    Navigation,
     Partners,
     People,
     Share,

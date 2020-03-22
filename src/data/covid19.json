@@ -2,8 +2,9 @@
   "baseUrl": "http://localhost:3000",
   "sections": [
     {
+      "id": "about",
       "type": "contribute",
-      "title": "HOW ARE YOU DOING TODAY?",
+      "title": "How are you doing today?",
       "description": "In which we check in with one another with casual updates...",
       "submit": "Do your daily checkin with your peers",
       "tag": "covid-discussion"
@@ -34,6 +35,7 @@
       "subtitle": "There are over 4,000 of us on the platform, but we can help you find the right person. Here are our most recently active members.",
       "tag": "webcontent-festival-organiser-bio"
     }, {
+      "id": "development",
       "type": "custom",
       "title": "Professional development",
       "image": {},
@@ -65,6 +67,7 @@
       "title": "Our Courses",
       "subtitle": "Since 2018 we've been producing online courses on fields and practices we believe to relevant to the 21st century workplace. You can find more at Edgeryders Academy."
     }, {
+      "id": "mission",
       "type": "mission",
       "title": "The Mission",
       "subtitle": "A dense network of co-created solutions to the big issues",
