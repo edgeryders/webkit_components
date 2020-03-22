@@ -9,7 +9,7 @@
       </h3>
 
       <div class="w-full flex flex-col md:flex-row items-start justify-between">
-        <div class="w-full md:w-1/2 mt-4 text-left leading-normal">
+        <div class="w-full md:w-1/2 pr-8 mt-4 text-left leading-normal">
           <p v-html="custom.description" class=" text-xl" />
         </div>
         <div class="w-full md:w-1/2 px-8 mt-6 md:mt-8 mb-8 md:pt-2 text-left text-xl border-l border-gray leading-normal">

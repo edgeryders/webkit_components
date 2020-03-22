@@ -2,7 +2,6 @@
   <div class="flex flex-col w-full">
     <Nav style="margin-bottom: 60px" :data="selectedComponents" />
     <div v-for="section in data.sections" :key="section.title" :id="section.id">
-      {{ section.type}}
       <Hero v-if="section.type == 'hero'" :baseUrl="data.baseUrl" :custom="section" />
       <Contribute v-if="section.type == 'contribute'" :baseUrl="data.baseUrl" :custom="section" />
       <Courses v-if="section.type == 'courses'" :baseUrl="data.baseUrl" :custom="section" />

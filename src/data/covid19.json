@@ -51,8 +51,7 @@
       }
     }, {
       "type": "video",
-      "sources": "https://ercrowdfund.netlify.com/media/MOOC_1.1506ea8d.mp4",
-      "poster": "https://festival.edgeryders.eu/img/video_poster.45ada98f.jpeg"
+      "sources": "https://ercrowdfund.netlify.com/media/MOOC_1.1506ea8d.mp4"
     }, {
       "type": "custom",
       "title": "Help us reach our fundraising goal of €10,000",
