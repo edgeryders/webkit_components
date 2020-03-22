@@ -1,20 +1,24 @@
 <template>
   <div class="flex flex-col w-full">
     <Nav style="margin-bottom: 60px" :data="selectedComponents" />
-
-    <Hero :baseUrl="data.baseUrl" :custom="getSectionData('hero')" :category="getCategoryMetadata()"/>
-
     <div v-for="section in data.sections" :key="section.title" :id="section.id">
+      {{ section.type}}
+      <Hero v-if="section.type == 'hero'" :baseUrl="data.baseUrl" :custom="section" />
+      <Contribute v-if="section.type == 'contribute'" :baseUrl="data.baseUrl" :custom="section" />
+      <Courses v-if="section.type == 'courses'" :baseUrl="data.baseUrl" :custom="section" />
+      <Current v-if="section.type == 'current'" baseUrl="https://egderyders.herokuapp.com" :custom="section" />
       <Custom v-if="section.type == 'custom'" :custom="section" html=true />
-      <Topics v-if="section.type == 'topics'" :baseUrl="data.baseUrl" :custom="section" />
+      <Edgeryders v-if="section.type == 'edgeryders'" :custom="section" />
       <Events v-if="section.type == 'events'" :baseUrl="data.baseUrl" :custom="section" />
-      <Users v-if="section.type == 'users'" :baseUrl="data.baseUrl" :custom="section" />
-      <People v-if="section.type == 'people'" :baseUrl="data.baseUrl" :custom="section" />
-      <Partners v-if="section.type == 'partners'" :custom="section"
-      />
-      <Edgeryders v-if="section.type == 'edgeryders'" :custom="section"
-      />
       <Form v-if="section.type == 'form'" :baseUrl="data.baseUrl" :custom="section" />
+      <HowItWorks v-if="section.type == 'howItWorks'" />
+      <Mission v-if="section.type == 'mission'" :baseUrl="data.baseUrl" :custom="section" />
+      <People v-if="section.type == 'people'" :baseUrl="data.baseUrl" :custom="section" />
+      <Partners v-if="section.type == 'partners'" :custom="section" />
+      <Share v-if="section.type == 'share'" :baseUrl="data.baseUrl" :custom="section" />
+      <Topics v-if="section.type == 'topics'" :baseUrl="data.baseUrl" :custom="section" />
+      <Users v-if="section.type == 'users'" :baseUrl="data.baseUrl" :custom="section" />
+      <Video v-if="section.type == 'video'" :custom="section" />
     </div>
 
     <Terms />
@@ -22,82 +26,57 @@
 </template>
 
 <script>
-import data from "@/data/config.json";
+import data from "@/data/covid19.json";
 
-import Nav from "@/components/Navigation.vue";
-import Hero from "@/components/Hero.vue";
+import Contribute from "@/components/Contribute.vue";
+import Courses from "@/components/Courses.vue";
+import Current from "@/components/Current.vue";
 import Custom from "@/components/Custom.vue";
-import Events from "@/components/Events.vue";
-import Topics from "@/components/Topics.vue";
-import People from "@/components/People.vue";
-import Users from "@/components/Users.vue";
-import Partners from "@/components/Partners.vue";
 import Edgeryders from "@/components/Edgeryders.vue";
+import Events from "@/components/Events.vue";
 import Form from "@/components/Form.vue";
+import Hero from "@/components/Hero.vue";
+import HowItWorks from "@/components/HowItWorks.vue";
+import Mission from "@/components/Mission.vue";
+import Nav from "@/components/Navigation.vue";
+import Partners from "@/components/Partners.vue";
+import People from "@/components/People.vue";
+import Share from "@/components/Share.vue";
 import Terms from "@/components/Terms.vue";
-
-import axios from "axios";
+import Topics from "@/components/Topics.vue";
+import Users from "@/components/Users.vue";
+import Video from "@/components/Video.vue";
 
 export default {
   name: "home",
   data() {
-    return {
-      data,
-      category: { users: [] },
-      categories: []
-    };
+    return { data };
   },
   components: {
-    People,
-    Users,
-    Topics,
-    Events,
-    Hero,
-    Nav,
+    Contribute,
+    Courses,
+    Current,
     Custom,
-    Partners,
     Edgeryders,
+    Events,
     Form,
-    Terms
-  },
-  created() {
-    this.fetchData();
-  },
-  methods: {
-    fetchData() {
-      axios
-        .get(`${this.data.baseUrl}/webkit_components/categories.json`)
-        .then(this.applyCategory);
-    },
-    applyCategory({ data }) {
-      this.categories = data;
-    },
-    getCategoryMetadata() {
-      var hero_data = this.getSectionData('hero');
-      if (hero_data.category) {
-         return this.categories.find(category => category.id === hero_data.category) || {};
-      } else {
-        return null
-      }
-    },
-    getSectionData(type) {
-      return this.data.sections.find(section => section.type === type) || {};
-    }
+    Hero,
+    HowItWorks,
+    Mission,
+    Nav,
+    Partners,
+    People,
+    Share,
+    Terms,
+    Topics,
+    Users,
+    Video
   },
   computed: {
     selectedComponents() {
-    var navArray = this.data.sections.map(function(el) {
-            if (el.id) {
-              return {
-                title: el.title,
-                id: el.id,
-              } 
-            }
-          });
-    return navArray.filter(function (el) {
-        return el != null;
-    });
-    
+      return this.data.sections
+        .filter(({ id }) => id)
+        .map(({ id, title }) => ({ id, title }))
     }
   }
 };

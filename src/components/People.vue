@@ -1,8 +1,11 @@
 <template>
   <div class="section md:section-md" id="people">
-    <div class="section_title">
+    <h1 v-if="custom.title" class="section_title">
       {{ custom.title }}
-    </div>
+    </h1>
+    <h3 v-if="custom.subtitle" class="w-1/2 px-6 section_subtitle">
+      {{ custom.subtitle }}
+    </h3>
     <div class="wrapper md:wrapper-md">
       <div class="user_grid md:user_grid-md">
         <div

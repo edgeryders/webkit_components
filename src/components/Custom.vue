@@ -1,5 +1,5 @@
 <template>
-  <div class="section md:section-md" id="about">
+  <div class="section md:section-md" :id="custom.id">
     <h1 class="section_title" v-if="custom.title">{{ custom.title }}</h1>
     <div
       class="wrapper md:wrapper-md"
@@ -16,12 +16,12 @@
           Sorry, your browser doesn't support embedded videos.
         </video>
       </div>
-      
+
       <div>
 
         <div v-if="html" v-html="custom.text.content" class="w-full section_text md:pt-4"></div>
         <div v-else class="w-full section_text md:pt-4">{{ custom.text.content }}</div>
-               
+
         <div v-if="custom.text.buttons" class="action_container">
           <a class="action" v-for="item in custom.text.buttons" :href="item.url" :style="styleObj(item)" :key="item.url" target="_blank">
             {{item.text}}

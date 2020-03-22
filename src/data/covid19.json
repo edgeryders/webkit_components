@@ -1,0 +1,87 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "sections": [
+    {
+      "type": "contribute",
+      "title": "HOW ARE YOU DOING TODAY?",
+      "description": "In which we check in with one another with casual updates...",
+      "submit": "Do your daily checkin with your peers",
+      "tag": "covid-discussion"
+    }, {
+      "type": "current",
+      "title": "Happening right now in the community",
+      "subtitle": "Find out what's happening now in the world of Edgeryders",
+      "sections": {
+        "events": "<span class='hidden md:inline'>Current</span> Events",
+        "conversations": "<span class='hidden md:inline'>Active</span> Conversations",
+        "calls": "<span class='hidden md:inline'>Community</span> Calls"
+      },
+      "question": "Want to know what we're up to <b>right now?</b> Check out <a href='https://ernow.netlify.com' target='_blank'>Now</a> for realtime updates from us."
+    }, {
+      "type": "topics",
+      "view": "cards",
+      "display": ["title", "date", "author"],
+      "title": "Ask Questions",
+      "subtitle": "By asking a question around a topic that matters to you right now, others in the community can share what they know or offer a helpful new perspective. By talking about what you are dealing with, you may even help someone else.",
+      "text": {
+        "content": "<p class='pb-4'>By asking a question around a topic that matters to you right now, others in the community can share what they know or offer a helpful new perspective.</p><p class='pb-4'>By talking about what you are dealing with, you may even help someone else.</p><button class='text-white bg-primary border border-primary text-xm font-semibold rounded-lg px-4 py-3 mt-6 leading-normal'>Start a conversation</button>"
+      },
+      "submit": "Ask a question",
+      "tag": "covid-discussion"
+    }, {
+      "type": "people",
+      "title": "Who are we?",
+      "subtitle": "There are over 4,000 of us on the platform, but we can help you find the right person. Here are our most recently active members.",
+      "tag": "webcontent-festival-organiser-bio"
+    }, {
+      "type": "custom",
+      "title": "Professional development",
+      "image": {},
+      "video": {},
+      "text": {
+        "content": "<p class='pb-4'>A world in which every human can live up to her full potential as a creative, responsible being. That is our vision. Our community culture is such that we collaboratively structure and share what we learn with anyone who needs it, whenever the need arises.</p><p class='pb-4'><b>Right now the priority is mobilisation around Covid19 crisis response.</b></p><p class='pb-4'>Many institutions, civil society organisations, companies and informal networks need to quickly set up good remote work practices. <b>But, remote collaboration can be hard. We have made all the mistakes and found good solutions so others don’t have to.</b></p>",
+        "buttons": [
+          {
+            "text": "Help us build the MOOC!",
+            "url": "https://edgeryders.eu/",
+            "background": "#00acc1",
+            "color": "#fff"
+          }
+        ]
+      }
+    }, {
+      "type": "video",
+      "sources": "https://ercrowdfund.netlify.com/media/MOOC_1.1506ea8d.mp4",
+      "poster": "https://festival.edgeryders.eu/img/video_poster.45ada98f.jpeg"
+    }, {
+      "type": "custom",
+      "title": "Help us reach our fundraising goal of €10,000",
+      "image": {},
+      "video": {},
+      "text": {
+        "content": "<p class='pb-4'><b>We're developing an online course with the aim to cover the essentials of remote work and collaboration.</b></p><p>Due to the current crisis, we are getting many requests to help people set up or improve their remote collaboration practises. So we are doing a sprint to quickly set up and share an <a href='https://en.wikipedia.org/wiki/Massive_open_online_course'>Open Online Course</a> on distributed collaboration.</p>"
+      }
+    }, {
+      "type": "courses",
+      "title": "Our Courses",
+      "subtitle": "Since 2018 we've been producing online courses on fields and practices we believe to relevant to the 21st century workplace. You can find more at Edgeryders Academy."
+    }, {
+      "type": "mission",
+      "title": "The Mission",
+      "subtitle": "A dense network of co-created solutions to the big issues",
+      "video": {
+        "src": "https://mirror.eu.oneandone.net/projects/media.ccc.de/events/camp2019/h264-sd/camp19-10204-eng-pol-Participatory_art_event_tools_co-creation_and_silk_road_networks_sd.mp4",
+        "img": "https://festival.edgeryders.eu/img/video_poster.45ada98f.jpeg"
+      },
+      "description": "<p>Our theory of change is building dense networks around people trying to tackle messy socialecological, economic and political challenges. Having a dense network around you is one of the hallmarks of social capital, and gives you access to expertise, resources, skill sharing and financing. In a dense network, there are many ways for you to get from one point to another. A key challenge here is for people with aligned interests to find each other, and as a community we’re out to solve just that.</p>"
+    }, {
+      "type": "howItWorks"
+    }, {
+      "type": "share",
+      "title": "Why share your story?",
+      "subtitle": "Edgeryders is not built on likes or hashtags. It is built on meaningful human connections and inspiration, which are the results of sharing and making sense of experiences together.",
+      "description": "<p class='pb-4'>Tell us a bit about yourself and where you are right now.</p><p class='pb-4'><b>Your story may help someone else out. Or, perhaps, by talking about what you're dealing with, you'll find an opportunity to solve a problem you've been wrestling with.</b></p>",
+      "submit": "Write a story"
+    }
+  ]
+}
