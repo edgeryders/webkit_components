@@ -15,14 +15,14 @@
     <swiper :options="swiperOption">
       <swiper-slide v-for="story in stories" :key="story.id">
         <div :style="{ background: `url(${story.image_url}) no-repeat` }" class="recent_post">
-          <a :href="`${this.custom.baseUrl}/t/${story.slug}`" target="_blank">{{ story.title }}</a>
+          <a :href="story.url" target="_blank">{{ story.title }}</a>
           <p class="timestamp">{{ story.created_at | formatDate }}</p>
 
-          <div class="footer">
+          <div class="footer pb-4">
             <ul class="share">
-              <a class="tweet" :href="'https://twitter.com/intent/tweet?url=http%3A%2F%2Fedgeryders.eu%2Ft%2F' + story.slug + '&text=' + story.title + '%20%7C%20Edgeryders'" target="_blank"></a>
-              <a class="fb" :href="'https://www.facebook.com/sharer/sharer.php?u=https://edgeryders.eu/t/' + story.slug" target="_blank"></a>
-              <a class="email" :href="'mailto:%20?body=https://edgeryders.eu/t/' + story.slug + ',&subject=' + story.title " target="_blank"></a>
+              <a class="tweet" :href="'https://twitter.com/intent/tweet?url=http%3A%2F%2Fedgeryders.eu%2Ft%2F' + story.id + '&text=' + story.title + '%20%7C%20Edgeryders'" target="_blank"></a>
+              <a class="fb" :href="'https://www.facebook.com/sharer/sharer.php?u=https://edgeryders.eu/t/' + story.id" target="_blank"></a>
+              <a class="email" :href="'mailto:%20?body=https://edgeryders.eu/t/' + story.id + ',&subject=' + story.title " target="_blank"></a>
             </ul>
           </div>
         </div>
@@ -76,8 +76,8 @@ export default {
     }
   },
   mounted() {
-    axios.get(`${this.baseUrl}/webkit_components/topics?tags=${this.custom.tags.join(',')}&from=0&per=8`).then(({ data }) => {
-      (this.stores = data)
+    axios.get(`${this.baseUrl}/webkit_components/topics.json?tags=${this.custom.tags.join(',')}&per=8`).then(({ data }) => {
+      this.stories = data
     })
   },
   props: ['baseUrl', 'custom'],
