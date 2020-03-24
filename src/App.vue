@@ -11,6 +11,7 @@
       <Events v-if="section.type == 'events'" :baseUrl="data.baseUrl" :custom="section" />
       <Form v-if="section.type == 'form'" :baseUrl="data.baseUrl" :custom="section" />
       <HowItWorks v-if="section.type == 'howItWorks'" />
+      <Jobs v-if="section.type == 'jobs'" />
       <Mission v-if="section.type == 'mission'" :baseUrl="data.baseUrl" :custom="section" />
       <People v-if="section.type == 'people'" :baseUrl="data.baseUrl" :custom="section" />
       <Partners v-if="section.type == 'partners'" :custom="section" />
@@ -37,6 +38,7 @@ import Events from "@/components/Events.vue";
 import Form from "@/components/Form.vue";
 import Hero from "@/components/Hero.vue";
 import HowItWorks from "@/components/HowItWorks.vue";
+import Jobs from "@/components/Jobs.vue";
 import Mission from "@/components/Mission.vue";
 import Navigation from "@/components/Navigation.vue";
 import Partners from "@/components/Partners.vue";
@@ -63,6 +65,7 @@ export default {
     Form,
     Hero,
     HowItWorks,
+    Jobs,
     Mission,
     Navigation,
     Partners,
