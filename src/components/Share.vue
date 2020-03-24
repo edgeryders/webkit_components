@@ -3,7 +3,7 @@
     <div class="text-center section md:section-md md:bg-gray-200">
       <h1 class="text-center section_title">{{ custom.title }}</h1>
       <p class="text-left" v-html="custom.description" />
-      <a href="https://edgeryders.eu/c/wellbeing" target="_blank">
+      <a :href="`${baseUrl}/c/${custom.category}`" target="_blank">
         <button class="text-white bg-primary border border-primary text-xm font-semibold rounded-lg px-4 py-3 mt-6 leading-normal">
           {{ custom.submit }}
         </button>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  props: ["custom"]
+  props: ["baseUrl", "custom"]
 };
 </script>
 

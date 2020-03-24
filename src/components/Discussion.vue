@@ -11,7 +11,7 @@
       <div class="w-full flex flex-col md:flex-row justify-between">
         <div class="flex flex-col items-stretch w-full md:w-1/2 px-6 md:px-10 mt-4 md:p-12 md:mt-0 text-left">
           <p v-html="custom.description" class="flex-grow text-xl" />
-          <a href='#events' v-smooth-scroll="{ duration: 1000, offset: -100 }">
+          <a href='#events'>
             <button class="text-white bg-primary border border-primary text-xm font-semibold rounded-lg px-4 py-3 leading-normal">
               {{ custom.submit }}
             </button>
@@ -19,15 +19,14 @@
         </div>
 
         <div class="md:w-1/2 px-4 md:block md:px-8 md:mt-8 md:pt-4 text-left text-xl border-l border-gray leading-normal discussion-wrapper">
-          <div v-for="discussion in discussions" :key="discussion.id" class="w-full flex content-align discussion">
-            <div class="w-full flex flex-col md:flex-row items-center md:content-center mb-8" v-if="discussion.author">
-              <div class="mt-10 mb-8 md:mt-0 md:mr-8 w-20 h-20 flex-none bg-white rounded-full shadow-lg border-4 border-white overflow-hidden object-cover bg-cover" :style="{ backgroundImage: 'url(' + discussion.author.avatar + ')' }" />
+          <div v-for="post in discussion.posts" :key="post.id" class="w-full flex content-align discussion">
+            <div class="w-full flex flex-col md:flex-row items-center md:content-center mb-8">
+              <div class="mt-10 mb-8 md:mt-0 md:mr-8 w-20 h-20 flex-none bg-white rounded-full shadow-lg border-4 border-white overflow-hidden object-cover bg-cover" :style="`{ backgroundImage: url(${post.avatar_url})' }`" />
               <div class="p-8 flex-grow bg-white rounded-lg md:shadow-xl bubble">
-                <p v-if='discussion.excerpt'>{{discussion.excerpt}}</p>
+                <p v-if='post.excerpt'>{{post.excerpt}}</p>
                 <div class="footer text-lg mt-4 flex items-stretch items-center h-12">
-                  <a :href="discussion.link" target="_blank" class="font-bold pr-4 border-r border-gray-200 flex items-center" v-if='discussion.author'>@{{ discussion.author.username }}</a>
-                  <a :href="discussion.link" target="_blank" class="date flex items-center text-base px-4 bg-white border-r border-gray-200" v-if='discussion.created'>{{ discussion.created && discussion.created | formatDate() }}</a>
-                  <a :href="discussion.link" target="_blank" class="comments flex items-center text-base px-4" v-if='discussion.comments'>{{ discussion.comments && discussion.comments }} comments</a>
+                  <a :href="post.url" target="_blank" class="font-bold pr-4 border-r border-gray-200 flex items-center" v-if='post.username'>@{{ post.username }}</a>
+                  <a :href="post.url" target="_blank" class="date flex items-center text-base px-4 bg-white border-r border-gray-200" v-if='post.created'>{{ post.created_at | formatDate() }}</a>
                 </div>
               </div>
             </div>
@@ -45,7 +44,7 @@ import axios from "axios";
 export default {
   props: ["custom", "baseUrl"],
   data() {
-    return { discussions: [] }
+    return { discussion: {} }
   },
   filters: {
     formatDate: function(value) {
@@ -53,8 +52,8 @@ export default {
     }
   },
   created() {
-    axios.get(`${this.baseUrl}/webkit_components/topics.json?tags=${this.custom.tag}`).then(({ data }) => {
-      this.discussions = data
+    axios.get(`${this.baseUrl}/webkit_components/topics/${this.custom.discussionId}.json`).then(({ data }) => {
+      this.discussion = data.discussion
     })
   }
 };

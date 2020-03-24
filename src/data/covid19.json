@@ -1,13 +1,13 @@
 {
-  "baseUrl": "https://edgeryders.eu",
+  "baseUrl": "http://localhost:3000",
   "sections": [
     {
-      "id": "about",
-      "type": "contribute",
+      "id": "discussion",
+      "type": "discussion",
       "title": "How are you doing today?",
-      "description": "In which we check in with one another with casual updates...",
+      "subtitle": "In which we check in with one another with casual updates...",
       "submit": "Do your daily checkin with your peers",
-      "tag": "covid-discussion"
+      "discussionId": 129
     }, {
       "type": "current",
       "title": "Happening right now in the community",
@@ -19,16 +19,13 @@
       },
       "question": "Want to know what we're up to <b>right now?</b> Check out <a href='https://ernow.netlify.com' target='_blank'>Now</a> for realtime updates from us."
     }, {
-      "type": "topics",
-      "view": "cards",
-      "display": ["title", "date", "author"],
+      "type": "stories",
       "title": "Ask Questions",
+      "category": "campfire",
       "subtitle": "By asking a question around a topic that matters to you right now, others in the community can share what they know or offer a helpful new perspective. By talking about what you are dealing with, you may even help someone else.",
-      "text": {
-        "content": "<p class='pb-4'>By asking a question around a topic that matters to you right now, others in the community can share what they know or offer a helpful new perspective.</p><p class='pb-4'>By talking about what you are dealing with, you may even help someone else.</p><button class='text-white bg-primary border border-primary text-xm font-semibold rounded-lg px-4 py-3 mt-6 leading-normal'>Start a conversation</button>"
-      },
-      "submit": "Ask a question",
-      "tag": "covid-discussion"
+      "tags": ["covid19", "work", "featured"],
+      "browse": "Or browse stories by others",
+      "submit": "Ask a question"
     }, {
       "type": "people",
       "title": "Who are we?",
@@ -37,7 +34,7 @@
     }, {
       "id": "development",
       "type": "custom",
-      "title": "Professional development",
+      "title": "Find opportunities for professional development",
       "image": {},
       "video": {},
       "text": {
@@ -80,10 +77,11 @@
       "type": "howItWorks"
     }, {
       "type": "share",
-      "title": "Why share your story?",
+      "title": "Why share your journey?",
       "subtitle": "Edgeryders is not built on likes or hashtags. It is built on meaningful human connections and inspiration, which are the results of sharing and making sense of experiences together.",
-      "description": "<p class='pb-4'>Tell us a bit about yourself and where you are right now.</p><p class='pb-4'><b>Your story may help someone else out. Or, perhaps, by talking about what you're dealing with, you'll find an opportunity to solve a problem you've been wrestling with.</b></p>",
-      "submit": "Write a story"
+      "description": "<p class='pb-4'>What is a burning question that drives your work? How did you get started and what hurdles have you met along the way? Which doubts do you have about the work you are doing and the path forward? What kind of support would you like to offer others traveling a similar path?</p><p class='pb-4'><b>By sharing your story on our community forum you enable others to connect you with people, conversations, opportunities relevant to who you are and the next phases of your journey</b></p>",
+      "submit": "Get started here",
+      "category": "campfire"
     }
   ]
 }
