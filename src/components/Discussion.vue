@@ -21,7 +21,7 @@
         <div class="md:w-1/2 px-4 md:block md:px-8 md:mt-8 md:pt-4 text-left text-xl border-l border-gray leading-normal discussion-wrapper">
           <div v-for="post in discussion.posts" :key="post.id" class="w-full flex content-align discussion">
             <div class="w-full flex flex-col md:flex-row items-center md:content-center mb-8">
-              <div class="mt-10 mb-8 md:mt-0 md:mr-8 w-20 h-20 flex-none bg-white rounded-full shadow-lg border-4 border-white overflow-hidden object-cover bg-cover" :style="`{ backgroundImage: url(${post.avatar_url})' }`" />
+              <div class="mt-10 mb-8 md:mt-0 md:mr-8 w-20 h-20 flex-none bg-white rounded-full shadow-lg border-4 border-white overflow-hidden object-cover bg-cover" :style="{ backgroundImage: `url(${post.avatar_url})` }" />
               <div class="p-8 flex-grow bg-white rounded-lg md:shadow-xl bubble">
                 <p v-html="post.cooked" v-if='post.excerpt' />
                 <div class="footer text-lg mt-4 flex items-stretch items-center h-12">
