@@ -14,15 +14,15 @@
       "subtitle": "Find out what's happening now in the world of Edgeryders",
       "events": {
         "title": "<span class='hidden md:inline'>Current</span> Events",
-        "tags": []
+        "tags": ["covid19"]
       },
       "conversations": {
         "title": "<span class='hidden md:inline'>Active</span> Conversations",
-        "tags": []
+        "tags": ["covid19"]
       },
       "calls": {
         "title": "<span class='hidden md:inline'>Community</span> Calls",
-        "tags": []
+        "tags": ["covid19"]
       },
       "question": "Want to know what we're up to <b>right now?</b> Check out <a href='https://ernow.netlify.com' target='_blank'>Now</a> for realtime updates from us."
     }, {
