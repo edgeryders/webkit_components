@@ -3,7 +3,7 @@
     <Navigation style="margin-bottom: 60px" :data="selectedComponents" />
     <div v-for="section in data.sections" :key="section.title" :id="section.id">
       <Hero v-if="section.type == 'hero'" :baseUrl="data.baseUrl" :custom="section" />
-      <Courses v-if="section.type == 'courses'" :baseUrl="data.baseUrl" :custom="section" />
+      <Course v-if="section.type == 'course'" :baseUrl="data.baseUrl" :custom="section" />
       <Current v-if="section.type == 'current'" :baseUrl="data.baseUrl" :custom="section" />
       <Custom v-if="section.type == 'custom'" :custom="section" html=true />
       <Discussion v-if="section.type == 'discussion'" :baseUrl="data.baseUrl" :custom="section" />
@@ -19,7 +19,6 @@
       <Stories v-if="section.type == 'stories'" :baseUrl="data.baseUrl" :custom="section" />
       <Topics v-if="section.type == 'topics'" :baseUrl="data.baseUrl" :custom="section" />
       <Users v-if="section.type == 'users'" :baseUrl="data.baseUrl" :custom="section" />
-      <Video v-if="section.type == 'video'" :custom="section" />
     </div>
 
     <Terms />
@@ -30,7 +29,7 @@
 import data from "@/data/covid19.json";
 
 import Discussion from "@/components/Discussion.vue";
-import Courses from "@/components/Courses.vue";
+import Course from "@/components/Course.vue";
 import Current from "@/components/Current.vue";
 import Custom from "@/components/Custom.vue";
 import Edgeryders from "@/components/Edgeryders.vue";
@@ -48,7 +47,6 @@ import Stories from "@/components/Stories.vue";
 import Terms from "@/components/Terms.vue";
 import Topics from "@/components/Topics.vue";
 import Users from "@/components/Users.vue";
-import Video from "@/components/Video.vue";
 
 export default {
   name: "home",
@@ -57,7 +55,7 @@ export default {
   },
   components: {
     Discussion,
-    Courses,
+    Course,
     Current,
     Custom,
     Edgeryders,
@@ -74,8 +72,7 @@ export default {
     Stories,
     Terms,
     Topics,
-    Users,
-    Video
+    Users
   },
   computed: {
     selectedComponents() {

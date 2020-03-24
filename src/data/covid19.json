@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://edgeryders.eu",
+  "baseUrl": "http://localhost:3000",
   "sections": [
     {
       "id": "discussion",
@@ -48,30 +48,7 @@
         "content": "<p class='pb-4'>A world in which every human can live up to her full potential as a creative, responsible being. That is our vision. Our community culture is such that we collaboratively structure and share what we learn with anyone who needs it, whenever the need arises.</p><p class='pb-4'><b>Right now the priority is mobilisation around Covid19 crisis response.</b></p><p class='pb-4'>Many institutions, civil society organisations, companies and informal networks need to quickly set up good remote work practices. <b>But, remote collaboration can be hard. We have made all the mistakes and found good solutions so others don’t have to.</b></p>"
       }
     }, {
-      "type": "custom",
-      "title": "An online course with the aim to cover the essentials of remote work and collaboration",
-      "image": {},
-      "video": {},
-      "text": {
-        "content": "<p class='pb-4'>Due to the crisis, many institutions, civil society organisations, companies and informal networks have <b>an urgent need to quickly set up good remote work practices.</b><p class='pb-4'>But remote collaboration can be hard...</p><ul class='pl-4 pb-4 list-disc'><li>Frustrating calls where half the time is spent on 'Hello can you hear me?'</li><li>Coworkers located elsewhere than the main office feeling left out</li><li>Feeling you just wasted an hour in a meeting where half the people are tuned out, checking out their email etc</li><li>Putting a lot of money and energy on new fancy tools to solve a problem, and later discovering that all you really needed was some features you didn’t know about in the tools you already had!!</li><li>Assuming that your co-workers are aware of what you wrote … but you didn’t know, as it was never clear who would get what notification when.</li><li>The awkwardness of people behaving inappropriately and causing everyone else discomfort.</li></ul><p class='pb-4'>.... We have made all the mistakes and found good solutions so others don’t have to.</p><p class='pb-4'><b>In 2019, we produced a comprehensive manual on distributed collaboration in partnership with EIT-Climate Kic, Europe’s largest public-private partnership for climate innovation.</b></p><p class='pb-4'><a class='underline' href='https://edgeryders.eu/t/distributed-collaboration-manual/11263/35'>You can access it here</a></p><p class='pb-4'>Now we are building an Open Online Course  out of what we learned to make it even more accessible.</p>"
-      }
-    }, {
-      "type": "custom",
-      "title": "This course will make it possible for you, and many others to have effective and enjoyable distributed interactions, teams and projects combining the best of many, many worlds…",
-      "image": {},
-      "video": {},
-      "text": {}
-    }, {
-      "type": "video",
-      "sources": "https://ercrowdfund.netlify.com/media/MOOC_1.1506ea8d.mp4"
-    }, {
-      "type": "custom",
-      "title": "",
-      "image": {},
-      "video": {},
-      "text": {
-        "content": "<p class='pb-4'><b>What you will learn</b></p><p class='pb-4'>The lessons and the learning materials will provide a mix of concrete examples, recommendations and general guidelines to make your distributed projects run smoother immediately. The general, tool independent, guidance will enable long term enjoyable and effective collaboration. It will help you to update your own work culture, systems and conventions for communication, collaboration and socializing.</p><p class='pb-4'><b>How you can access the course</b></p><p class='pb-4'>If enough people share the costs involved, we can make it completely free to access for everyone who needs it!  You can help make this happen in two ways:</p>"
-      }
+      "type": "course"
     }, {
       "type": "jobs"
     },{

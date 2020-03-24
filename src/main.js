@@ -10,6 +10,9 @@ import vSelect from 'vue-select'
 
 export const bus = new Vue();
 
+import { VueMailchimpEmailSignupForm } from "vue-mailchimp-email-signup-form";
+Vue.component("vue-mailchimp-email-signup-form", VueMailchimpEmailSignupForm);
+
 Vue.use(VueMq, {
 	breakpoints: {
 		sm: 450,
