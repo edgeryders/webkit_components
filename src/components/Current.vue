@@ -1,19 +1,19 @@
 <template>
-  <div class="w-full px-6 md:px-20 md:py-0">
-    <h2 class="font-display text-4xl text-left font-bold md:text-5xl mb-4 md:mb-0 md:mt-0 md:ml-0 md:mb-1 leading-tight md:leading-normal font-medium">
+  <div class="w-full px-6 md:px-20 md:py-0 mt-4">
+    <h1 class="section_title">
       {{ custom.title }}
-    </h2>
+    </h1>
 
-    <h2 class="font-display text-2xl text-left font-bold leading-tight md:leading-normal">
+    <h3 class="font-display text-2xl text-left font-bold leading-tight md:leading-normal">
       {{ custom.subtitle }}
-    </h2>
+    </h3>
 
     <div class="w-full py-4 md:py-8 flex flex-col md:flex-row">
       <div class="flex flex-col sidebar mr-10">
         <ul class="upcoming w-full h-20 mb-4 md:mb-0 md:px-0 md:h-auto text-left">
-          <li class="pb-3 p-4 text-xl" @click="activate('events')" :class="{active: active == 'events'}"><span class="hidden md:inline">Current</span> Events</li>
-          <li class="pb-3 p-4 text-xl" @click="activate('conversations')" :class="{active: active == 'conversations'}"><span class="hidden md:inline">Active</span> Conversations</li>
-          <li class="pb-3 p-4 text-xl" @click="activate('calls')" :class="{active: active == 'calls'}"><span class="hidden md:inline">Community</span> Calls</li>
+          <li v-html="custom.events.title" class="pb-3 p-4 text-xl" @click="activate('events')" :class="{active: active == 'events'}" />
+          <li v-html="custom.conversations.title" class="pb-3 p-4 text-xl" @click="activate('conversations')" :class="{active: active == 'conversations'}" />
+          <li v-html="custom.calls.title" class="pb-3 p-4 text-xl" @click="activate('calls')" :class="{active: active == 'calls'}" />
         </ul>
 
         <div class="w-full mt-8 rounded-lg bg-black p-4 hidden md:block now">
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="w-full px-0 md:px-0 md:w-2/3 p-2 md:p-0 text-left events" v-if="active == 'events'">
+      <div class="w-full px-0 md:px-0 md:w-2/3 p-2 md:p-0 relative text-left events" v-if="active == 'events'">
         <swiper :options="sliderOptions" class='md:px-10' ref="mySwiper">
           <swiper-slide class="story_slide" v-for="(story, index) in events" :key="index" :index="index">
             <div class="story bg-cover bg-center flex flex-col shadow-lg" style="height: 400px; width: 100% !important; margin: 0 auto !important; background-repeat: no-repeat; background-color: RGBA(66, 103, 178, 1.00)" :style="{ backgroundImage: 'url(' + story.image + ')' }">
@@ -52,9 +52,9 @@
       <div class="w-full px-0 md:px-0 md:w-2/3 p-2 md:p-0 text-left conversations" v-if="active == 'calls'">
         <div class="entry" v-for="(entry, index) in activeCalls" :key="index">
           <div class="box" :style="{'background': colors[index]}">
-            <div class="time">{{entry.created | formatDateShort}} @ {{entry.created | formatTime}}</div>
+            <div class="time">{{entry.created_at | formatDateShort}} @ {{entry.created_at | formatTime}}</div>
             <h3>
-              <a :href="'https://edgeryders.eu/t/' + entry.slug">{{entry.title}}</a>
+              <a :href="entry.url">{{entry.title}}</a>
             </h3>
           </div>
           <Profile class='profile' text="Hosted by" :data="entry.author" :key="index" />
@@ -141,10 +141,14 @@ export default {
   },
   props: ["custom", "baseUrl"],
   mounted() {
-    axios.get(`${this.baseUrl}/festival`).then(({ events, conversations, calls }) => {
-      this.events = events;
-      this.conversations = conversations;
-      this.calls = calls;
+    axios.get(`${this.baseUrl}/webkit_components/topics.json?tags=${this.custom.events.tags}&per=8`).then(({ data }) => {
+      this.events = data
+    })
+    axios.get(`${this.baseUrl}/webkit_components/topics.json?tags=${this.custom.conversations.tags}&per=8`).then(({ data }) => {
+      this.conversations = data
+    })
+    axios.get(`${this.baseUrl}/webkit_components/topics.json?tags=${this.custom.calls.tags}&per=8`).then(({ data }) => {
+      this.calls = data
     })
   }
 };

@@ -4,7 +4,7 @@
     <div v-for="section in data.sections" :key="section.title" :id="section.id">
       <Hero v-if="section.type == 'hero'" :baseUrl="data.baseUrl" :custom="section" />
       <Courses v-if="section.type == 'courses'" :baseUrl="data.baseUrl" :custom="section" />
-      <Current v-if="section.type == 'current'" baseUrl="https://egderyders.herokuapp.com" :custom="section" />
+      <Current v-if="section.type == 'current'" :baseUrl="data.baseUrl" :custom="section" />
       <Custom v-if="section.type == 'custom'" :custom="section" html=true />
       <Discussion v-if="section.type == 'discussion'" :baseUrl="data.baseUrl" :custom="section" />
       <Edgeryders v-if="section.type == 'edgeryders'" :custom="section" />
