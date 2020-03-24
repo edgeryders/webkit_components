@@ -23,7 +23,7 @@
             <div class="w-full flex flex-col md:flex-row items-center md:content-center mb-8">
               <div class="mt-10 mb-8 md:mt-0 md:mr-8 w-20 h-20 flex-none bg-white rounded-full shadow-lg border-4 border-white overflow-hidden object-cover bg-cover" :style="`{ backgroundImage: url(${post.avatar_url})' }`" />
               <div class="p-8 flex-grow bg-white rounded-lg md:shadow-xl bubble">
-                <p v-if='post.excerpt'>{{post.excerpt}}</p>
+                <p v-html="post.cooked" v-if='post.excerpt' />
                 <div class="footer text-lg mt-4 flex items-stretch items-center h-12">
                   <a :href="post.url" target="_blank" class="font-bold pr-4 border-r border-gray-200 flex items-center" v-if='post.username'>@{{ post.username }}</a>
                   <a :href="post.url" target="_blank" class="date flex items-center text-base px-4 bg-white border-r border-gray-200" v-if='post.created'>{{ post.created_at | formatDate() }}</a>
