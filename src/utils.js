@@ -1,5 +1,6 @@
 import config from "@/data/config.json";
 
+
 import WebFontLoader from 'webfontloader';
 import axios from "axios";
 export default {
