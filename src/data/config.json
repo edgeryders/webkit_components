@@ -1,12 +1,15 @@
 {
   "baseUrl": "https://edgeryders.eu",
+  "config": {
+    "baseUrl": "https://edgeryders.eu"
+  },
   "style": {
-    "fonts": ["Ubuntu:400,500,700,800,900", "Inconsolata:200,500"],
+    "fonts": ["Ubuntu:400,500,700,800,900", "Inconsolata:200,500", "Playfair+Display"],
     "title": {
       "width": ["90%", "75%"],
       "padding": ["0 0 10px"],
       "align": ["left"],
-      "font": ["Helvetica"],
+      "font": ["Ubuntu"],
       "weight": ["600"],
       "size": ["text-2xl", "text-3xl"]
     },
@@ -140,7 +143,11 @@
       "views": [
         {
           "image": [{"url": "https://placekitten.com/540/360", "size": 300}],
-          "text": "<h3 class='font-bold text-xl mb-3'>About this section</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>",
+          "style": {
+            "font-size": ["18px"],
+            "padding": ["0 20px"]
+          }
        }
       ]
     },
@@ -155,7 +162,6 @@
         },
         "title": {
           "size": ["text-3xl"],
-          "font": ["Ubuntu"],
           "weight": ["700"],
           "width": ["100%", "100%"],
           "class": ["border-b pb-2 mb-4"]
@@ -166,11 +172,18 @@
       },
       "views": [
         {
-          "text": ["<p><b>This is html content.</b> Text can be broken into multiple paragraphs</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</p>", "<h4>This is a list with a custom css class..</h4><ul class='border-l px-10 py-6 list-decimal bg-gray-200'><li>To see how inline styling works, check out the <a href='/guide/styling'>Styling</a> section of the guide</li><li>WebKit can render <b>inline css</b> as well as <b>Tailwind</b> css classes</li><li>So you are flexible to style individual elements within the configuration</li></ul>"]
+          "text": ["<p class='md:pt-2'><b>This is html content.</b> Text can be broken into multiple paragraphs</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</p>", "<ul class='p-6 rounded-lg border'><li class='pb-4'>To see how inline styling works, check out the <a href='/guide/styling'>Styling</a> section of the guide</li><li class='border-gray-200 border-t py-4'>WebKit can render <b>inline css</b> as well as <b>Tailwind</b> css classes</li><li class='border-gray-200 border-t pt-4'>So you are flexible to style individual elements within the configuration</li></ul>"],
+          "style": {
+            "font-size": ["16px"],
+            "line-height": ["25px"]
+          }
         },
         {
           "image": [{"url": "https://i.pinimg.com/originals/15/5c/bc/155cbc2717684aa8285538b7e04b3000.jpg", "size": "300px"}],
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          "text": "<p class='pb-4 inline-block leading-relaxed'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p><p class='p-2 py-4 pr-4 mt-8 bg-gray-200 w-2/3 leading-relaxed border-l-2 border-gray-300 pl-6'>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p><p class='pt-4 inline-block leading-relaxed'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>",
+          "style": {
+            "padding": ["0", "30px"]
+          }
         },
         {
           "text": "<h3 class='font-bold text-lg border-b pb-2'>Child Blocks</h3><p class='highlight'>The <b>Content Block</b> can render multiple <b>Views</b> as child components.</p><p class='highlight pt-2'>In this example we have the <b>Form View</b> next to a <b>Text View</b>, both rendered as child components of the Content Block.</p>",
@@ -226,60 +239,70 @@
       "title": "Topics",
       "style": {
         "container": {
-          "padding": ["30px 0 0", "30px 0 0 0"]
-        },
-        "wrapper": {
-          "width": ["90%", "75%"],
-          "background": ["#efefef", "#fff"],
-          "padding": ["15px 15px 0", "10px 0 0"]
-        },
-        "highlight": {
-          "color": ["black"],
-          "background": ["white"]
+          "padding": ["30px 0 0", "50px 0 20px"]
         }
-    },
+      },
       "id": "topics",
-      "view": "cards",
-      "tag": "webcontent-ngi-summit-2020-topics",
-      "text": {
-        "content": "<p>Here are some topics. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
-        "position": "left"
+      "config": {
+        "view": "list",
+        "tag": "webcontent-ngi-summit-2020-topics",
+        "sort_by": {
+          "property": "bumped_at",
+          "order": "descending"
+        }
       },
-      "sort_by": {
-        "property": "bumped_at",
-        "order": "descending"
-      },
-      "display": ["title"],
       "views": [
         {
+          "text": "<p>Here are some topics. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+          "style": {
+            "width": ["75%"],
+            "font-size": ["18px"]
+          }
+        },
+        {
           "slider": {
-            "autoplay": true,
-            "pauseHover": true,
-            "display": ["arrows", "title", "date", "excerpt", "link", "favourites"],
-            "link": {
-              "text": "Read More"
+            "config": {
+              "autoplay": 5000,
+              "pauseHover": true,
+              "navigation": true,
+              "display": ["arrows", "title", "date", "excerpt", "link", "favourites", "replies"],
+              "link": {
+                "text": "Read More"
+              },
+              "sort_by": {
+                "property": "title",
+                "order": "ascending"
+              }
             },
-            "sort_by": {
-              "property": "title",
-              "order": "ascending"
+            "style": {
+              "width": ["75%"],
+              "toggle": {
+                "backgroundColor": ["#282C34"]
+              }
             }
           }
         },
         {
           "grid": {
-            "display": ["title", "date", "excerpt", "link", "favourites"],
+            "display": ["title", "date", "excerpt", "link", "replies", "favourites"],
             "sort_by": {
               "property": "title",
               "order": "ascending"
+            },
+            "style": {
+              "width": ["90%", "75%"]
             }
           }
         },
         {
           "list": {
-            "display": ["title", "date", "excerpt", "link", "favourites"],
+            "display": ["title", "date", "excerpt", "link", "favourites", "replies", "author"],
             "sort_by": {
               "property": "title",
               "order": "ascending"
+            },
+            "style": {
+              "width": ["100%", "75%"]
             }
           }
         },
@@ -296,9 +319,9 @@
     },
     {
       "type": "events",
+      "id": "events",
       "config": {
-        "title": "My Events",
-        "id": "events",
+        "title": "Events",
         "tags": {
           "event": "event-ngi-summit-2020",
           "proposed": "proposed",
@@ -319,6 +342,12 @@
           }
         ]
       },
+      "style": {
+        "container": {
+          "padding": ["10px 0 40px"],
+          "margin": ["40px 0 20px"]
+        }
+      },
       "views": [
         {
           "grid": {
@@ -326,6 +355,9 @@
             "sort_by": {
               "property": "title",
               "order": "ascending"
+            },
+            "style": {
+              "width": ["90%", "75%"]
             }
           }
         },
@@ -336,10 +368,32 @@
               "property": "event_date",
               "order": "ascending"
             },
-            "group_by": "event_date"
+            "group_by": "event_date",
+            "style": {
+              "width": ["90%", "75%"]
+            }
           }
         }
       ]
+    },
+    {
+      "type": "people",
+      "title": "People",
+      "id": "people",
+      "style": {
+        "container": {
+          "padding": ["30px 0 0"],
+          "background": ["#fafafa"],
+          "width": ["70%"]
+        },
+        "title": {
+          "padding": ["0 0 20px"]
+        }
+      },
+      "profiles": 13644,
+      "tag": "webcontent-ngi-summit-2020-bio",
+      "tagHeadliners": "webcontent-ngi-summit-2020-bio",
+      "tagOthers": "webcontent-ngi-summit-2020-bio-small"
     },
     {
       "type": "custom_form",
@@ -357,7 +411,8 @@
           "padding": ["0px 20px"]
         },
         "wrapper": {
-          "padding": ["0"]
+          "padding": ["0"],
+          "width": ["75%"]
         }
       },
       "settings": {

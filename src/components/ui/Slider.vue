@@ -8,12 +8,12 @@
       <div class="toggle_menu mr-6 md:flex md:mr-0" v-if="show('arrows')">
         <div
           class="toggle previous"
-          :style="uiStyle('toggle', data.style)"
+          :style="uiElementStyle('toggle', data.style)"
           @click="changeSlide('back')"
         ></div>
         <div
           class="toggle next"
-          :style="uiStyle('toggle', data.style)"
+          :style="uiElementStyle('toggle', data.style)"
           @click="changeSlide('next')"
         ></div>
       </div>
@@ -139,7 +139,7 @@ export default {
       return moment(String(value)).format("dddd, MMMM DD YYYY");
     }
   },
-  props: ["autoplay", "data", "display", "stylesheet", "globalStyle"]
+  props: ["autoplay", "data", "display", "config", "stylesheet", "globalStyle"]
 };
 </script>
 

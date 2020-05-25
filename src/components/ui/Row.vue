@@ -54,7 +54,7 @@
           </div>
         </template>
         <template slot="back">
-          <div class="card_excerpt" :style="textStyle('paragraph', stylesheet)" v-html="strippedCooked(item.cooked)"></div>
+          <div class="card_excerpt" :style="textStyle('paragraph', stylesheet)" v-html="item.excerpt"></div>
           <a class="card_footer" :style="uiStyle('action', stylesheet)" :href="item.url" target="_blank">Discuss this topic</a>
         </template>
       </Card>

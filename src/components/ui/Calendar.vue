@@ -1,5 +1,5 @@
 <template>
- <div class="container border">
+ <div class="container border border-gray-200">
   <div class="navigation">
     <div class="nav left" @click="previous"></div>
     <div class="month">{{months[selected][0].format('MMMM YYYY')}}</div> 
@@ -16,9 +16,8 @@
 <script>
 import moment from "moment";
 import { bus } from '@/main'
-
 export default {
-  name: 'CalComp',
+  name: 'Calendar',
   data() {
     return {
       months: [],
@@ -94,11 +93,11 @@ export default {
       if (this.filterEvent(date) !== null) {
         var background = 'black'
         // var color = this.eventColor(this.filterEvent(date).event_type);
-        if (this.stylesheet.highlight && this.stylesheet.highlight.background) {
-          background = this.stylesheet.highlight.background;
-        } else if (this.globalStyle.highlight && this.globalStyle.highlight.background) {
-          background = this.globalStyle.highlight.background;
-        }
+        // if (this.stylesheet.highlight && this.stylesheet.highlight.background) {
+        //   background = this.stylesheet.highlight.background;
+        // } else if (this.globalStyle.highlight && this.globalStyle.highlight.background) {
+        //   background = this.globalStyle.highlight.background;
+        // }
 
         var obj = {
           "display": "flex",
@@ -154,10 +153,12 @@ export default {
   align-items: center;
   position: relative;
   border-bottom: 1px solid #efefef;
+  background: #fafafa;
   overflow: hidden;
   .month {
     font-weight: bold;
-    color: rgba(0,0,0,0.75);
+    color: black;
+    font-size: 14px;
     flex-grow: 1;
     text-align: center;
     padding: 10px;
@@ -197,7 +198,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   max-width: 1024px;
-  width: 100%;
+  width: 92%;
 }
 
 #calendar > *{

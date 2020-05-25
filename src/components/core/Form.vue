@@ -9,7 +9,7 @@
       <div class="form mt-4" v-if="!submitted">
         <div class="field" v-for="(field, index) in data.fields" :key="index">
           <h4 :class="{title_underline: field.type == 'create_account'}">{{field.title}} <span v-if="field.required && field.id !== 'create_account'" class="required">*</span></h4>
-          <p class="small" v-if="field.subtitle">{{field.subtitle}}</p>
+          <p class="small pt-2" v-if="field.subtitle">{{field.subtitle}}</p>
           <input v-if="field.type == 'text'" type="text" v-model="form[field.id]" :placeholder="field.placeholder"/>
           <textarea v-if="field.type == 'textarea'" v-model="form[field.id]" :placeholder="field.placeholder"/>
           <div class="flex items-center mt-4 px-1" v-if="field.type == 'create_account'">
@@ -113,4 +113,8 @@ export default {
   }
 };
 </script>
-
+<style lang="scss">
+.content_block .form p {
+  margin-bottom: 0 !important;
+}
+</style>

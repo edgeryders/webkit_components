@@ -3,52 +3,49 @@
     <div class="flex font-bold justify-between items-center mx-auto" v-if="data.title" :style="textStyle('title', data.style)" >
       <h3 class="m-0 p-0 w-full" :class="titleClassSize(data.style)">{{ data.title }}</h3>
       <div class="toggle_menu" v-if="data.views && data.views.length">
-        <div v-for="(view, index) in data.views"
+        <div v-for="(view, index) in getViews(data.views)"
           class="toggle"
-          :class="[Object.keys(view)[0], {active: activeView == Object.keys(view)[0]}]"
-          @click="toggleView(Object.keys(view)[0])"
+          :class="[view, {active: activeView == view}]"
+          @click="toggleView(view)"
           :key="index"
         ></div>
       </div>
     </div>
-
-    <div
-      class="wrapper md:wrapper-md mx-auto"
-      v-if="data.text"
-      :style="wrapperStyle(data.style)"
-    >
-      <div v-if="data.text.content" class="section_text" :style="textStyle('paragraph', data.style)" v-html="data.text.content">
-      </div>
-    </div>
-
     <div v-for="(view, index) in data.views" :key="index">
+
+              <TextView v-if="view.text" class="wrapper md:wrapper-md py-4 pb-2 mx-auto" :style="elementStyle(view.style, 'wrapper')" :data="view.text" />
 
               <Slider
                 v-if="topics && view.slider && activeView == 'slider' && ready"
-                :autoplay="5000"
                 :data="topics"
-                :config="view"
                 :baseUrl="config.baseUrl"
-                :stylesheet="data.style"
+                :config="view.slider.config"
+                :display="view.slider.config.display"
+                :stylesheet="view.slider.style"
                 class="mx-auto"
                 ref="slider"
-                :mq="viewport"
               />
       
-              <Grid v-if="topics && view.slider && activeView == 'grid' && ready" :mq="viewport" v-bind:data="topics">
+              <Grid v-if="topics && view.grid && activeView == 'grid' && ready" v-bind:data="topics" :config="view.grid">
                 <template v-slot:item="{ item }">
                   
                  <GridItem>
                     <template>
                       <div slot="header">
-                        <a :href="item.url" target="_blank" class="">{{item.title}}</a>
-                        <p class="item_date">
+                        <a :href="getPermalink(item.slug)" target="_blank" class="">{{item.title}}</a>
+                        <p class="item_date" v-if="show(view.grid.display, 'date')">
                           {{ item.created_at | formatDate }}
                         </p>
                       </div>
                       <div slot="content">
                         <div class="item_image" :style="{ background: 'url(' + item.image_url + ')' }"></div>
                         <div class="item_excerpt" v-html="item.excerpt"></div>
+                      </div>
+                      <div slot="footer">
+                        <div class="item_meta">
+                          <a class="item_favs" v-if="show(view.grid.display, 'favourites')" :href="getPermalink(item.slug)" target="_blank">{{item.like_count}}</a>
+                          <a class="item_replies" v-if="show(view.grid.display, 'replies')" :href="getPermalink(item.slug)" target="_blank">{{item.reply_count}}</a>
+                        </div>
                       </div>
                     </template>
                  </GridItem>
@@ -58,7 +55,7 @@
 
              
 
-          <List v-if="topics && view.list && activeView == 'list' && ready" :mq="viewport" :data="topics" :config="data">
+          <List v-if="topics && view.list && activeView == 'list' && ready" :data="topics" :config="view.list">
             <template v-slot:item="{ item }">
               
               <h4 class="item_title">{{item.title}}</h4>
@@ -77,10 +74,16 @@
 
             <div slot="title">
               <div class="selected_title">
-                <a :href="selected.url" target="_blank">
+                <a :href="getPermalink(selected.slug)" target="_blank">
                   {{selected.title}}
                 </a>
               </div>
+
+               <div class="item_meta" v-if="view.list.display && show(view.list.display, 'favourites') || view.list.display && show(view.list.display, 'replies')">
+                <a class="item_favs" v-if="show(view.list.display, 'favourites')" :href="getPermalink(selected.slug)" target="_blank">{{selected.like_count}}</a>
+                <a class="item_replies" v-if="show(view.list.display, 'replies')" :href="getPermalink(selected.slug)" target="_blank">{{selected.reply_count}}</a>
+              </div>
+
             </div>
 
             <div slot="content">
@@ -94,8 +97,7 @@
           </template>
         </List>
 
-    <Row v-if="topics && view.cards && activeView == 'cards' && ready" :topics="topics" :stylesheet="data.style" :display="data.display" :globalStyle="globalStyle" />
-
+        <Row v-if="topics && view.cards && activeView == 'cards' && ready" :topics="topics" :stylesheet="data.style" :display="view.cards.display" />
   </div>
   </div>
 </template>
@@ -105,6 +107,7 @@ import Slider from "@/components/views/Slider.vue";
 import Grid from "@/components/views/Grid.vue";
 import GridItem from "@/components/views/GridItem.vue";
 import List from "@/components/views/ListView.vue";
+import TextView from "@/components/views/Text.vue";
 
 import Row from "@/components/ui/Row.vue";
 import axios from "axios";
@@ -122,6 +125,7 @@ export default {
     };
   },
   components: {
+    TextView,
     Slider,
     Grid,
     GridItem,
@@ -129,26 +133,44 @@ export default {
     Row
   },
   created() {
-    this.activeView = Object.keys(this.data.views[0])[0];
-    if (this.data.tag) {
-      this.getTopics(this.data.tag, 'tags');
+    this.activeView = this.getViews(this.data.views)[0];
+    if (this.data.config.view) {
+      this.activeView = this.data.config.view
     }
-    if (this.data.category) {
+    if (this.data.config.tag) {
+      this.getTopics(this.data.config.tag, 'tags');
+    }
+    if (this.data.config.category) {
       this.getTopics(this.data.category, 'category');
     }
   },
   methods: {
+    show(array, property) {
+      if (array.includes(property)) {
+        return true
+      } else {
+        return false
+      }
+    },
     getTopics(value, filter) {
       axios.get(
-        `${this.baseUrl}/webkit_components/topics.json?${filter}=${value}&per=500&serializer=organizer`
+        `${this.config.baseUrl}/${filter}/${value}.json`
       ).then(({ data }) => {
-        this.topics = data;
+        var topics = data.topic_list.topics;
         if (this.data.sort_by) {
-           data = this.sortBy(data, this.data.sort_by.property, this.data.sort_by.order)
+           topics = this.sortBy(data, topics.sort_by.property, topics.sort_by.order)
          }
-        this.topics = data;
+        this.topics = topics;
         this.ready = true
       });
+    },
+    getViews(data) {
+      return data.reduce(function(result, view) {
+        if (Object.keys(view)[0] !== "text") {
+          result.push(Object.keys(view)[0]);
+        }
+        return result;
+      }, []);
     },
     sortBy(data, value, order) {
       var ord_val = -1;
@@ -196,12 +218,13 @@ export default {
     }
     &:hover {
       cursor: pointer;
-      background-color: #ddd !important;
+      opacity: 0.9;
+
     }
     &.active {
       background-color: #282C34 !important;
       &:hover {
-        background-color: #000 !important;
+        opacity: 0.9;
       }
     }
   }
@@ -242,4 +265,34 @@ export default {
       no-repeat center 53% #282C34;
     background-size: 31% !important;
   }
+
+
+.item_favs {
+  @apply font-bold mt-0 p-3 pl-6 pr-4 text-sm;
+  color: rgba(0,0,0,0.7);
+  text-decoration: none !important;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 45.8 54.7'%3E%3Cpath fill='rgba(0,0,0,0.7)' d='M9.6 27.3a2.1 2.1 0 01.6 1.9L8 41.3a2 2 0 003 2.2l10.9-5.8a2.1 2.1 0 012 0l10.9 5.8a2 2 0 003-2.2l-2.1-12.1a2.1 2.1 0 01.6-2l8.9-8.5a2.1 2.1 0 00-1.2-3.6l-12.2-1.6a2.1 2.1 0 01-1.6-1.2L24.8 1.2a2.1 2.1 0 00-3.8 0l-5.3 11.1a2.1 2.1 0 01-1.7 1.2L1.8 15a2.1 2.1 0 00-1.2 3.6z' data-name='Calque 2'/%3E%3C/svg%3E") no-repeat 15px 56%;
+  background-size: 14px;
+  padding-left: 35px;
+}
+
+.item_replies {
+  @apply border-gray-200 font-bold p-3 pl-6 pr-4 text-sm;
+  color: rgba(0,0,0,0.7);
+  text-decoration: none !important;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' data-name='Layer 1' viewBox='0 0 512 640'%3E%3Cpath fill='rgba(0,0,0,0.7)' d='M512 396v26c-3 7-5 14-11 19-18 14-43 7-52-15-9-24-26-39-48-50-30-15-63-21-96-23l-78-1a23 23 0 00-3 0v62a39 39 0 01-2 11c-6 22-34 33-55 12L15 284c-7-6-13-13-15-22v-12c2-9 8-16 15-22l87-87 66-66c10-11 23-14 36-8s20 17 20 31v62h7c6 0 58 1 105 13 28 7 73 19 109 50 66 57 67 150 67 173z'/%3E%3C/svg%3E") no-repeat 15px 56%;
+  background-size: 14px;
+  padding-left: 35px;
+}
+
+    .item_meta {
+      @apply flex items-center bg-gray-100 overflow-hidden border-t border-gray-200;
+      height: 45px;
+      a {
+        @apply border-l;
+        &:nth-child(1) {
+          border: none;
+        }
+      }
+    }
 </style>

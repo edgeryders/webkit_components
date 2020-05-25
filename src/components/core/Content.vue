@@ -10,9 +10,8 @@
       <div class="w-full">
         <div v-for="(view, index) in data.views" :key="index" class="content_block md:content_block-md">
               <ImageView v-if="view.image" :mq="viewport" :data="view.image" />    
-              <TextView v-if="view.text" :mq="viewport" :data="view.text" />
+              <TextView v-if="view.text" :mq="viewport" :data="view.text" :stylesheet="view.style" />
               <FormView v-if="view.form" :mq="viewport" :data="view.form" />
-
         </div>
       </div>
   </div>
@@ -89,6 +88,9 @@ export default {
 }
 .content_block-md {
   @apply flex-row;
+  > div:first-child {
+     @apply mr-6;
+  }
 }
 .content_block + .content_block {
   @apply mt-4;

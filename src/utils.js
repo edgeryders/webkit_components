@@ -1,7 +1,7 @@
 import config from "@/data/config.json";
 
 import WebFontLoader from 'webfontloader';
-
+import axios from "axios";
 export default {
   data: function() {
     return {
@@ -66,22 +66,19 @@ export default {
       if (font || toggle || highlight || action) {
         this.overrideStyle = true;
       }
-      // if (configId) {
-      //   config = configId;
-      // }
-
-      // axios.get(
-      // 'https://edgeryders.eu/t/' + config + '.json'
-      // ).then(({ data }) => {
-      //   var json = this.getJson(data.post_stream.posts[0].cooked);
-      //   if (json.event) {
-      //     this.$globals.event = json.event
-      //   }
-      //   this.loadData(json);
-      // });
-
-      this.loadData(this.config);
-
+      if (this.config.config.configId) {
+           axios.get(
+              'https://edgeryders.eu/t/' + config + '.json'
+              ).then(({ data }) => {
+                var json = this.getJson(data.post_stream.posts[0].cooked);
+                if (json.event) {
+                  this.$globals.event = json.event
+                }
+                this.loadData(json);
+              });
+      } else {
+          this.loadData(this.config);
+      }
     },
     loadData(data){
       if (this.overrideStyle) {
@@ -91,6 +88,7 @@ export default {
       }
       this.sections = data.blocks;
       this.$globals.blocks = data.blocks;
+      this.$globals.config = data.config;
       if (data.event) {
         this.$globals.event = data.event;
       }
@@ -161,6 +159,36 @@ export default {
         }
         else {
           style = this.sectionStyle[element][property][0];
+        }
+      }
+
+      if (this.overrideStyle && this.globalStyle[element] && this.globalStyle[element][property]) {
+        if (this.globalStyle[element][property][index]) {
+          style = this.globalStyle[element][property][index];
+        } else {
+          style = this.globalStyle[element][property][0];
+        }
+      }
+      return style;
+    },
+    style(element, property) {
+      var index = this.MediaQueryIndex();
+      var style = '';
+
+      if (this.globalStyle && this.globalStyle[element] && this.globalStyle[element][property]) {
+        if (this.globalStyle[element][property][index]) {
+          style = this.globalStyle[element][property][index];
+        } else {
+          style = this.globalStyle[element][property][0];
+        }
+      } 
+  
+      if (this.sectionStyle && this.sectionStyle[property]) {
+        if (this.sectionStyle[property][index]) {
+          style = this.sectionStyle[property][index];
+        }
+        else {
+          style = this.sectionStyle[property][0];
         }
       }
 
@@ -285,9 +313,42 @@ export default {
       };
       return styleObj;
     },
+    elementStyle(style, element) {
+      this.sectionStyle = style;
+
+      var styleObj = {};
+      
+      for (var propName in style) { 
+        if (style[propName] !== null || style[propName] !== undefined || style[propName] !== '' || style[propName] !== "") {
+          styleObj[propName] = this.style(element, propName)
+        }
+      }
+      return styleObj;
+    },
+    customUiStyle(style, ui) {
+      if (style && style[ui]) {
+
+        this.sectionStyle = style;
+        window.console.log(style, ui);
+
+        var styleObj = {};
+        
+        for (var propName in style[ui]) { 
+          if (style[ui][propName] !== null || style[ui][propName] !== undefined || style[ui][propName] !== '' || style[ui][propName] !== "") {
+            styleObj[propName] = this.applyStyle(ui, propName)
+          }
+        }
+        return styleObj;
+      } else {
+        return null
+      }
+    },
     titleClassSize(style) {
       this.sectionStyle = style;
       return this.applyStyle('title', 'size')
+    },
+    getPermalink(slug) {
+      return this.$globals.config.baseUrl + '/t/' + slug;
     }
 	}
 }

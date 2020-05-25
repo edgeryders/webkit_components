@@ -1,5 +1,5 @@
 <template>
-  <div class="view_grid md:view_grid-md" :class="{ 'view_grid-md': $mq == 'md' }">
+  <div class="view_grid md:view_grid-md" :class="{ 'view_grid-md': $mq == 'md' }" :style="elementStyle(config.style, 'wrapper')">
   <div
     v-for="(item, index) in data"
     :key="index"
@@ -16,7 +16,7 @@
 <script>
 export default {
   name: "Grid",
-  props: ["data", "mq"]
+  props: ["data", "mq", "config"]
 };
 </script>
 <style lang="scss">

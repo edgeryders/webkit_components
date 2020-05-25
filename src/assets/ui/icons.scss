@@ -55,7 +55,7 @@
 
   .toggle.previous {
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' data-name='Layer 1' viewBox='0 0 128 160'%3E%3Cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16' d='M85 22L43 64l42 42'/%3E%3C/svg%3E")
-      no-repeat center 65% #efefef;
+      no-repeat center 65%;
     border-right: 1px solid white;
   }
 
@@ -70,7 +70,7 @@
 
   .toggle.next {
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' data-name='Layer 1' viewBox='0 0 128 160'%3E%3Cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16' d='M43 22l42 42-42 42'/%3E%3C/svg%3E")
-      no-repeat center 65% #efefef;
+      no-repeat center 65%;
   }
 
   .toggle.cards.active {

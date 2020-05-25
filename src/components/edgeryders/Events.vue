@@ -17,7 +17,7 @@
       
      <div v-for="(view, index) in data.views" class="w-full" :key="index">
       <div v-if="view.grid && activeView == 'grid'">
-         <div class="event_grid_options w-full mb-6 pt-6">
+         <div class="event_grid_options w-full mb-6">
           <div class="event_search">
             <div v-for="filter in search.filters" :key="filter.tag" class="search_filter" :style="{background: filter.color}" :class="{plainTag: filter.color == null}" @click="setFilter(filter)">
               {{filter.tag}}
@@ -48,7 +48,8 @@
             </transition>
           </div>
         </div>
-      <Grid :mq="viewport" v-bind:data="filteredItems">
+
+      <Grid :mq="viewport" v-bind:data="filteredItems" :config="view.grid">
         <template v-slot:item="{ item }">
          <GridItem>
             <template>
@@ -120,6 +121,7 @@ import moment from "moment";
 import Grid from "@/components/views/Grid.vue";
 import GridItem from "@/components/views/GridItem.vue";
 import List from "@/components/views/ListView.vue";
+import Calendar from "@/components/ui/Calendar.vue";
 
 import TextView from "@/components/views/Text.vue";
 
@@ -144,7 +146,8 @@ export default {
     Grid,
     GridItem,
     List,
-    TextView
+    TextView,
+    Calendar
   },
   methods: {
     activePopup(value) {
@@ -215,7 +218,7 @@ export default {
       var array = [];
       events.map(obj => {
         return obj.tags.map(tag => {
-          if (!array.includes(tag.name) && this.data.filters[tag.name]) {
+          if (!array.includes(tag.name) && this.data.config.filters[tag.name]) {
             array.push(tag.name)
           }
         });
@@ -225,7 +228,7 @@ export default {
     getTags(obj) {
       var array = [];
       obj.tags.map(tag => {
-        if (!array.includes(tag.name) && this.data.filters[tag.name]) {
+        if (!array.includes(tag.name) && this.data.config.filters[tag.name]) {
           array.push(tag.name)
         }
       });
@@ -292,6 +295,7 @@ export default {
   },
   created() {
     this.getEvents(this.data.config.tags.event);
+    this.activeView = Object.keys(this.data.views[0])[0];
     bus.$on('setFilterDate', (data) => {
       this.setDate(data);
     })
@@ -327,6 +331,14 @@ export default {
 
     return filtered
     }
+  },
+  filters: {
+    formatDate: function(value) {
+      return moment(String(value)).format("dddd, MMMM Do YYYY");
+    },
+    formatTime: function(value) {
+      return moment(String(value)).format("HH:mm a");
+    },
   }
 };
 </script>

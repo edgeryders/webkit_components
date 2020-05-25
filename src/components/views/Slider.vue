@@ -3,7 +3,23 @@
     @mouseover="clear_interval"
     @mouseleave="toggle_play"
     class="pt-1"
+    :style="elementStyle(stylesheet, 'wrapper')"
   >
+
+    <div class="flex justify-end mb-4" v-if="show('arrows')">
+      <div class="toggle_menu mr-6 md:flex md:mr-0">
+        <div
+          class="toggle previous"
+          :style="customUiStyle(stylesheet, 'toggle')"
+          @click="changeSlide('back')"
+        ></div>
+        <div
+          class="toggle next"
+          :style="customUiStyle(stylesheet, 'toggle')"
+          @click="changeSlide('next')"
+        ></div>
+      </div>
+    </div>
 
    <transition-group tag="div" class="slider md:slider-md" :class="{ 'slider-md': $mq == 'md' }" :name="currentTransition" mode="out-in">
       <div v-for="number in [currentIndex]" :key="number" class="slide">
@@ -20,11 +36,11 @@
               </p>
             </div>
           <div class="slide_excerpt md:slide_excerpt-md" v-html="currentSlide.excerpt"></div>
-          <div class="flex">
+          <div class="flex items-center item_meta">
             <a class="slide_link" v-if="show('link')" :href="getPermalink(currentSlide.slug)" target="_blank">Read more</a>
-<!--             <a class="item_favs" v-if="show('favourites')" :href="getPermalink(currentSlide.slug)" target="_blank">{{currentSlide.like_count}}</a>
-            <a class="item_replies" v-if="show('favourites')" :href="getPermalink(currentSlide.slug)" target="_blank">{{currentSlide.reply_count}}</a>
- -->          </div>
+            <a class="item_favs" v-if="show('favourites') && currentSlide.like_count > 0" :href="getPermalink(currentSlide.slug)" target="_blank">{{currentSlide.like_count}}</a>
+            <a class="item_replies" v-if="show('replies') && currentSlide.reply_count > 0" :href="getPermalink(currentSlide.slug)" target="_blank">{{currentSlide.reply_count}}</a>
+ </div>
         </div>
         </div>
       </div>
@@ -50,8 +66,8 @@ export default {
   },
   methods: {
     show(value) {
-      if (this.config && this.config.slider && this.config.slider.display) {
-        return this.config.slider.display.includes(value);
+      if (this.display) {
+        return this.display.includes(value);
       } else {
         return true
       }
@@ -68,11 +84,6 @@ export default {
       this.currentIndex = dir === 'next' ? this.currentIndex + 1 : this.currentIndex - 1;
       this.currentTransition = dir;
     },
-    getUser(userId) {
-      if (this.users.length) {
-        return this.users.filter(user => user.id == userId)[0];
-      }
-    },
     clear_interval() {
       if (this.interval) {
         clearInterval(this.interval);
@@ -84,11 +95,8 @@ export default {
       var self = this;
       this.interval = setInterval(function() {
         self.changeSlide('next');
-      }, this.autoplay);
+      }, this.config.autoplay);
       this.play = true;
-    },
-    getPermalink(slug) {
-      return this.baseUrl + '/t/' + slug;
     },
     toggle_play() {
       if (this.autoplay && this.interval) {
@@ -129,7 +137,7 @@ export default {
       return moment(String(value)).format("dddd, MMMM DD YYYY");
     }
   },
-  props: ["autoplay", "data", "mq", "baseUrl", "config", "stylesheet", "globalStyle"]
+  props: ["data", "mq", "config", "display", "stylesheet"]
 };
 </script>
 
@@ -142,8 +150,7 @@ export default {
   min-height: 36rem;
   border-radius: 10px;
   @apply flex items-center rounded-lg;
-  width: 105%;
-  margin: 0 0 0 -2.5%;
+  width: 100%;
 }
 
 .slider_container {
@@ -160,7 +167,7 @@ export default {
 
 .slider-md {
   min-height: 20rem;
-  max-width: 90%;
+  max-width: 100%;
   @apply mx-auto;
   .slider_container {
     @apply flex-row;
@@ -176,7 +183,6 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: 0 2.5%;
   border-radius: 10px;
   top: 0;
   left: 0;
@@ -193,28 +199,36 @@ export default {
 }
 
 .slide_link {
-  @apply border p-3 rounded-lg text-sm ml-0;
+  @apply py-3 px-3 pr-3 font-bold text-sm m-0 ml-0 rounded-none;
+   &:hover {
+    background-color: #efefef;
+  }
+}
+
+.item_meta {
+  background-color: #fafafa;
+  @apply rounded-lg overflow-hidden border border-gray-200;
 }
 
 .item_favs {
-  @apply border border-gray-200 font-bold ml-3 p-3 rounded-lg text-sm;
+  @apply border-l border-gray-200 font-bold mt-0 p-3 pl-6 pr-4 text-sm;
   color: rgba(0,0,0,0.7);
   text-decoration: none !important;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 45.8 54.7'%3E%3Cpath fill='rgba(0,0,0,0.7)' d='M9.6 27.3a2.1 2.1 0 01.6 1.9L8 41.3a2 2 0 003 2.2l10.9-5.8a2.1 2.1 0 012 0l10.9 5.8a2 2 0 003-2.2l-2.1-12.1a2.1 2.1 0 01.6-2l8.9-8.5a2.1 2.1 0 00-1.2-3.6l-12.2-1.6a2.1 2.1 0 01-1.6-1.2L24.8 1.2a2.1 2.1 0 00-3.8 0l-5.3 11.1a2.1 2.1 0 01-1.7 1.2L1.8 15a2.1 2.1 0 00-1.2 3.6z' data-name='Calque 2'/%3E%3C/svg%3E") no-repeat 10px 56%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 45.8 54.7'%3E%3Cpath fill='rgba(0,0,0,0.7)' d='M9.6 27.3a2.1 2.1 0 01.6 1.9L8 41.3a2 2 0 003 2.2l10.9-5.8a2.1 2.1 0 012 0l10.9 5.8a2 2 0 003-2.2l-2.1-12.1a2.1 2.1 0 01.6-2l8.9-8.5a2.1 2.1 0 00-1.2-3.6l-12.2-1.6a2.1 2.1 0 01-1.6-1.2L24.8 1.2a2.1 2.1 0 00-3.8 0l-5.3 11.1a2.1 2.1 0 01-1.7 1.2L1.8 15a2.1 2.1 0 00-1.2 3.6z' data-name='Calque 2'/%3E%3C/svg%3E") no-repeat 15px 56%;
   background-size: 14px;
-  padding-left: 30px;
+  padding-left: 35px;
   &:hover {
     background-color: #efefef;
   }
 }
 
 .item_replies {
-  @apply border border-gray-200 font-bold ml-3 p-3 rounded-lg text-sm;
+  @apply border-l border-gray-200 font-bold p-3 pl-6 pr-4 text-sm;
   color: rgba(0,0,0,0.7);
   text-decoration: none !important;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' data-name='Layer 1' viewBox='0 0 512 640'%3E%3Cpath fill='rgba(0,0,0,0.7)' d='M512 396v26c-3 7-5 14-11 19-18 14-43 7-52-15-9-24-26-39-48-50-30-15-63-21-96-23l-78-1a23 23 0 00-3 0v62a39 39 0 01-2 11c-6 22-34 33-55 12L15 284c-7-6-13-13-15-22v-12c2-9 8-16 15-22l87-87 66-66c10-11 23-14 36-8s20 17 20 31v62h7c6 0 58 1 105 13 28 7 73 19 109 50 66 57 67 150 67 173z'/%3E%3C/svg%3E") no-repeat 10px 56%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' data-name='Layer 1' viewBox='0 0 512 640'%3E%3Cpath fill='rgba(0,0,0,0.7)' d='M512 396v26c-3 7-5 14-11 19-18 14-43 7-52-15-9-24-26-39-48-50-30-15-63-21-96-23l-78-1a23 23 0 00-3 0v62a39 39 0 01-2 11c-6 22-34 33-55 12L15 284c-7-6-13-13-15-22v-12c2-9 8-16 15-22l87-87 66-66c10-11 23-14 36-8s20 17 20 31v62h7c6 0 58 1 105 13 28 7 73 19 109 50 66 57 67 150 67 173z'/%3E%3C/svg%3E") no-repeat 15px 56%;
   background-size: 14px;
-  padding-left: 30px;
+  padding-left: 35px;
   &:hover {
     background-color: #efefef;
   }
@@ -294,6 +308,15 @@ export default {
 }
 .back-leave-to {
   transform: translate(100%, 0);
+}
+
+.toggle_menu {
+  @apply inline-flex justify-end;
+  align-self: end;
+  background: black;
+  .toggle:hover {
+    opacity: 0.9;
+  }
 }
 
 

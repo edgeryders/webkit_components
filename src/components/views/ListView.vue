@@ -1,5 +1,5 @@
 <template>
-  <div class="list_view md:list_view-md" :class="{ 'list_view-md': $mq == 'md' }">
+  <div class="list_view md:list_view-md" :class="{ 'list_view-md': $mq == 'md' }" :style="elementStyle(config.style, 'wrapper')">
   <div
     class="list_sidebar"
   >
@@ -23,7 +23,7 @@
       <slot name="image"></slot>
       <slot name="title"></slot>
       <slot name="content"></slot>
-      <slot name="footer"></slot>
+      <slot class="footer" name="footer"></slot>
     </slot>
   </div>
 
@@ -111,8 +111,8 @@ export default {
   filters: {
 
   },
-  mounted(){
-    this.selected = this.data[0]
+  created(){
+    this.selected = this.filteredItems[0]
   }
 };
 </script>
@@ -239,6 +239,22 @@ export default {
     .go_back {
       @apply hidden;
     }
+  }
+}
+}
+
+.list_selected { 
+  height: 100%;
+  @apply relative;
+}
+
+.list_view {
+.item_meta {
+  @apply relative px-2 border-none;
+  background: none !important;
+  a {
+  @apply m-0 pr-0;
+    border: none;
   }
 }
 }
