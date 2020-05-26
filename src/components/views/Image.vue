@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center block_image md:block_image-md">
+  <div class="flex items-start block_image md:block_image-md">
     <img v-for="image in data" :key="image.url" :src="image.url" :width="image.size" />
   </div>
 </template>

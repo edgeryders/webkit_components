@@ -180,9 +180,9 @@
         },
         {
           "image": [{"url": "https://i.pinimg.com/originals/15/5c/bc/155cbc2717684aa8285538b7e04b3000.jpg", "size": "300px"}],
-          "text": "<p class='pb-4 inline-block leading-relaxed'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p><p class='p-2 py-4 pr-4 mt-8 bg-gray-200 w-2/3 leading-relaxed border-l-2 border-gray-300 pl-6'>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p><p class='pt-4 inline-block leading-relaxed'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>",
+          "text": 13659,
           "style": {
-            "padding": ["0", "30px"]
+            "padding": ["0", "0 10px"]
           }
         },
         {

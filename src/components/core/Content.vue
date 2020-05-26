@@ -79,12 +79,6 @@ export default {
 }
 .content_block {
   @apply flex flex-col py-2;
-  /deep/ h3, /deep/ h4 {
-    @apply mb-4 mt-1;
-  }
-  /deep/ p {
-    margin-bottom: 10px !important;
-  }
 }
 .content_block-md {
   @apply flex-row;
@@ -95,8 +89,6 @@ export default {
 .content_block + .content_block {
   @apply mt-4;
   }
-.block /deep/ p {
-  margin: 0;
-}
+
 }
 </style>
