@@ -2,12 +2,13 @@
     <div class="site_container">
       <div v-if="globalStyleSheet">
         <div v-for="(section, index) in sections" :key="index" :id="section.id">
-          <component v-bind:is="section.type" :key="componentKey + index" :baseUrl="config.baseUrl" :globalStyle="globalStyleSheet" :data="section" :index="index"></component>
+          <component v-bind:is="section.type" :key="componentKey + index" :baseUrl="$globals.config.baseUrl" :globalStyle="globalStyleSheet" :data="section" :index="index"></component>
         </div>
       </div>
     </div>
 </template>
 
+<script src="js-yaml.min.js"></script>
 <script>
 
 import Nav from "@/components/ui/Navigation.vue";

@@ -89,6 +89,11 @@ export default {
 .content_block + .content_block {
   @apply mt-4;
   }
+}
 
+.text {
+  h3 {
+    @apply mb-3;
+  }
 }
 </style>

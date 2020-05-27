@@ -4,24 +4,33 @@
       <span class="logo">
         <svg viewBox='0 0 500 500' version='1' xmlns='http://www.w3.org/2000/svg'><path fill='orangered' d='M0 250a250 250 0 1 1 500 0 250 250 0 0 1-500 0zm250 183V250H67a183 183 0 1 1 183 183z' fill-rule='evenodd'/></svg>
       </span>
-      <scrollactive
-        class="nav"
-        active-class="active"
-        :offset="80"
-        :duration="800"
-        bezier-easing-value=".5,0,.35,1"
-        v-if="$mq == 'md'"
-        :style="textStyle('paragraph')"
-      >
-        <a
-          class="nav-item scrollactive-item"
-          :style="hoverStyle()"
-          :href="'#' + item.id"
-          v-for="item in data"
-          :key="item.id"
-          >{{ item.id }}</a
+        <scrollactive
+          active-class="active"
+          :offset="80"
+          :duration="800"
+          class="nav"
+          bezier-easing-value=".5,0,.35,1"
+          :style="textStyle('paragraph')"
+          v-if="$mq == 'md'"
         >
-      </scrollactive>
+          <a
+            class="nav-item scrollactive-item"
+            :style="hoverStyle()"
+            :href="item.url"
+            v-for="item in anchor"
+            :key="item.text"
+            >{{ item.text }}</a
+          >
+           <a
+          class="nav-item external"
+          :style="hoverStyle()"
+          :href="item.url"
+          v-for="item in external"
+          :key="item.text"
+          >{{ item.text }}</a
+        >
+        </scrollactive>
+
       <div class="hamburger" @click="toggleMenu" :class="{'active': open}" v-if="$mq == 'sm'">
         <span :style="uiStyle('highlight', stylesheet)"></span>
         <span :style="uiStyle('highlight', stylesheet)"></span>
@@ -38,7 +47,7 @@
  */
 export default {
   name: "Navigation",
-  props: ["data", "open", "globalStyle", "stylesheet"],
+  props: ["anchor", "external", "open", "globalStyle", "stylesheet"],
   data() {
     return {
       mobileMenu: false
@@ -92,6 +101,12 @@ export default {
   border-right: 1px solid rgba(0, 0, 0, 0.05) !important;
   &:last-child {
     border-right: none !important;
+  }
+  &.external {
+    @apply font-light;
+    &:hover {
+      @apply underline;
+    }
   }
   &.active {
     color: #fff !important;

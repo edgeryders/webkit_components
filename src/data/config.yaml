@@ -1,0 +1,316 @@
+---
+config:
+  baseUrl: https://edgeryders.eu
+  title: Webkit Sandbox
+style:
+  fonts: ["Ubuntu:400,500,700,800,900"]
+  title:
+    width: [90%, 75%]
+    padding: [0 0 10px]
+    align: [left]
+    font: [Ubuntu]
+    weight: ['600']
+    size: [text-2xl, text-3xl]
+blocks:
+- type: Header
+  config:
+    title: Webkit Sandbox
+  views:
+  - menu:
+      config:
+        id: true
+        external: 
+          - text: External Link
+            url: https://edgeryders.eu/t/start-page/13522
+      style:
+        position: [fixed]
+        height: [2rem]
+  - hero:
+      config:
+        template: standard
+      style:
+        wrapper:
+          width: [90%, 65%]
+          padding: [20px 10px, 70px 0]
+        button:
+          background: [white]
+          color: [black]
+          class: [border-b border-gray-300 py-2 font-bold mr-4 text-sm]
+      title: Webkit Sandbox 2
+      text: This is the sandbox site for Webkit. Enter a topic_id with a valid configuration
+        to preview your site.
+      image:
+        url: https://erwebkit.netlify.app/edgeryders.svg
+        width: [100px, 160px]
+      buttons:
+      - text: 'Link #1'
+        url: "#join"
+      - text: 'Link #2'
+        url: "#strategy"
+      - text: 'Link #3'
+        url: "#about"
+  style:
+    title:
+      weight: ['500']
+      width: [100%]
+      class: [text-3xl]
+      padding: ['0', '0']
+    wrapper:
+      width: [90%, 75%]
+      padding: [0]
+    subtitle:
+      class: [text-3xl font-light]
+    paragraph:
+      weight: ['400']
+    container:
+      padding: [10px 0 20px, '0']
+      background: ['rgba(0,0,0,0.03)']
+    button:
+      background: [white]
+      color: [black]
+      class: [rounded-lg border p-3 mr-3]
+    tag:
+      color: [white]
+      background: [RGBA(46, 164, 138, 1.00)]
+    highlight:
+      color: [RGBA(46, 164, 138, 1.00)]
+- type: Content
+  id: about
+  style:
+    wrapper:
+      width: [100%, 80%]
+      padding: ['0', 30px 0px]
+  views:
+  - image:
+    - url: https://placekitten.com/540/360
+      size: 300
+    text: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.</p>"
+    style:
+      font-size: [18px]
+      padding: [0 20px]
+- type: Content
+  id: strategy
+  title: This is another content section..
+  style:
+    container:
+      padding: [30px 0 20px]
+      background: ["#fafafa"]
+    title:
+      size: [text-3xl]
+      weight: [700]
+      width: [100%]
+      class: [border-b pb-2 mb-4]
+    wrapper:
+      padding: [0 15px, 10px 0 0]
+  views:
+  - text: ["<p><b>This is html content.</b> Text can be broken into multiple paragraphs</p><p>Lorem
+      ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+      in reprehenderit in voluptate velit esse cillum</p>", "<ul class='p-6 rounded-lg border bg-white'><li class='pb-4'>To see how inline
+      styling works, check out the <a href='/guide/styling'>Styling</a> section of
+      the guide</li><li class='border-gray-200 border-t py-4'>WebKit can render <b>inline
+      css</b> as well as <b>Tailwind</b> css classes</li><li class='border-gray-200
+      border-t pt-4'>So you are flexible to style individual elements within the configuration</li></ul>"]
+    style:
+      font-size: [16px]
+      line-height: [25px]
+  - image:
+    - url: https://i.pinimg.com/originals/15/5c/bc/155cbc2717684aa8285538b7e04b3000.jpg
+      size: 300px
+    text: 13659
+    style:
+      padding: [0, 0 10px]
+  - text: "<h3 class='font-bold text-lg border-b pb-2 mb-3'>Child Blocks</h3><p class='highlight'>The
+      <b>Content Block</b> can render multiple <b>Views</b> as child components.</p><p
+      class='highlight pt-2'>In this example we have the <b>Form View</b> next to
+      a <b>Text View</b>, both rendered as child components of the Content Block.</p>"
+    form:
+      config:
+        createTopic: true
+        categoryId: 349
+        airtable:
+          base: ''
+          table: ''
+      title: Form View
+      fields:
+      - title: Your Name
+        id: name
+        type: text
+        placeholder: enter your name
+        required: true
+      - title: Your Email
+        id: email
+        type: text
+        placeholder: enter your email
+        required: true
+      - title: How can you help?
+        id: proposal
+        type: textarea
+        placeholder: example of textarea input
+        required: true
+      - id: create_account
+        title: Registering will create an account on Edgeryders for you. Do you agree?
+        type: create_account
+        required: true
+      success:
+        title: Your form has been sent, thanks for registering!
+        text: Check your inbox for a confirmation email with your account details.
+- type: topics
+  title: Topics
+  style:
+    container:
+      padding: [30px 0 0, 50px 0 20px]
+  id: topics
+  config:
+    view: list
+    tag: webcontent-ngi-summit-2020-topics
+    sort_by:
+      property: bumped_at
+      order: descending
+  views:
+  - text: "<p>Here are some topics. Lorem ipsum dolor sit amet, consectetur adipiscing
+      elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+      enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+      ex ea commodo consequat.</p>"
+    style:
+      width: [75%]
+      font-size: [18px]
+  - slider:
+      config:
+        autoplay: 5000
+        pauseHover: true
+        navigation: true
+        display: [arrows, title, date, excerpt, link, favourites, replies]
+        link:
+          text: Read More
+        sort_by:
+          property: title
+          order: ascending
+      style:
+        width: [75%]
+        toggle:
+          backgroundColor: ["#282C34"]
+  - grid:
+      display: [title, date, excerpt, link, favourites, replies]
+      sort_by:
+        property: title
+        order: ascending
+      style:
+        width: [90%, 75%]
+  - list:
+      display: [title, date, excerpt, link, favourites, replies, author]
+      sort_by:
+        property: title
+        order: ascending
+      style:
+        width: [100%, 75%]
+  - cards:
+      display: [title, date, excerpt, link, favourites]
+      sort_by:
+        property: title
+        order: ascending
+- type: events
+  id: events
+  config:
+    title: Events
+    tags:
+      event: event-ngi-summit-2020
+      proposed: proposed
+      confirmed: confirmed
+    filters:
+    - tag: webinar
+      color: "#5C6BC1"
+    - tag: discussion
+      color: "#2EA48A"
+    - tag: brainstorm
+      color: "#DF6D00"
+  style:
+    container:
+      padding: [10px 0 40px]
+      margin: [40px 0 20px]
+  views:
+  - grid:
+      display: [title, date, time, image, excerpt, status]
+      sort_by:
+        property: title
+        order: ascending
+      style:
+        width: [90%, 75%]
+  - list:
+      display: [title, time, excerpt, author, search, link, favourites]
+      sort_by:
+        property: event_date
+        order: ascending
+      group_by: event_date
+      style:
+        width: [90%, 75%]
+- type: people
+  title: People
+  id: people
+  style:
+    container:
+      padding: [30px 0 0]
+      background: ["#fafafa"]
+      width: [70%]
+    title:
+      padding: [0 0 20px]
+  profiles: 13644
+  tag: webcontent-ngi-summit-2020-bio
+  tagHeadliners: webcontent-ngi-summit-2020-bio
+  tagOthers: webcontent-ngi-summit-2020-bio-small
+- type: custom_form
+  title: Here is a custom form
+  id: join
+  style:
+    title:
+      width: [100%, 75%]
+      size: [text-3xl, text-3xl]
+    paragraph:
+      class: [text-xl, font-bold]
+    container:
+      padding: [0px 20px]
+    wrapper:
+      padding: ['0']
+      width: [75%]
+  settings:
+    createTopic: true
+    categoryId: 349
+    airtable:
+      base: appVGanp2p2N4vuVP
+      table: Submissions
+  content: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>"
+  fields:
+  - title: Your Name
+    id: name
+    type: text
+    placeholder: enter your name
+    required: true
+  - title: Your Email
+    id: email
+    type: text
+    placeholder: enter your email
+    required: true
+  - title: How can you help with the summit?
+    id: proposal
+    type: textarea
+    placeholder: examples include setting up session, doing documentation or helping
+      promote it
+    required: true
+  - id: create_account
+    title: Registering will create an account on Edgeryders for you.
+    subtitle: This will be how we stay in contact and coordinate for the summit. Do
+      you agree?
+    type: create_account
+    required: true
+  success:
+    title: Your form has been sent, thanks for registering!
+    text: Check your inbox for a confirmation email with your account details.
+- type: terms

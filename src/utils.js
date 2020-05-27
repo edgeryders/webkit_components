@@ -1,8 +1,10 @@
 import config from "@/data/config.json";
-
-
 import WebFontLoader from 'webfontloader';
+var YAML = require('yamljs');
 import axios from "axios";
+
+
+
 export default {
   data: function() {
     return {
@@ -54,34 +56,79 @@ export default {
       this.globalStyleSheet = obj;
 
     },
-    getData() {
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      const font = urlParams.get('font');
-      const toggle = urlParams.get('toggle');
-      const highlight = urlParams.get('highlight');
-      const action = urlParams.get('action');
-      // const configId = urlParams.get('config');
-      // var config = 13575;
-
-      if (font || toggle || highlight || action) {
-        this.overrideStyle = true;
+    remoteConfig(configId) {
+      axios.get(
+        'https://edgeryders.eu/t/' + configId + '.json'
+        ).then(({ data }) => {
+          if (this.getJson(data.post_stream.posts[0].cooked)){
+            var json = this.getJson(data.post_stream.posts[0].cooked);
+            this.loadData(json);
+          } else {
+            var yaml = this.getYaml(data.post_stream.posts[0].cooked);
+            this.loadData(yaml);
+          } 
+        });
+    },
+    localConfig(){
+      var config;
+      try {
+        config = require('@/data/config.yaml');
       }
-      if (this.config.config.configId) {
-           axios.get(
-              'https://edgeryders.eu/t/' + config + '.json'
-              ).then(({ data }) => {
-                var json = this.getJson(data.post_stream.posts[0].cooked);
-                if (json.event) {
-                  this.$globals.event = json.event
-                }
-                this.loadData(json);
-              });
+      catch(err) {
+        config = require('@/data/config.json');
+      }
+      if (config.config.configId) {
+       axios.get(
+          'https://edgeryders.eu/t/' + config.config.configId + '.json'
+          ).then(({ data }) => {
+            if (this.getJson(data.post_stream.posts[0].cooked)){
+              var json = this.getJson(data.post_stream.posts[0].cooked);
+              this.loadData(json);
+            } else if (this.getYaml(data.post_stream.posts[0].cooked)) {
+              var yaml = this.getYaml(data.post_stream.posts[0].cooked);
+              this.loadData(yaml);
+            } else {
+              this.loadData(config);
+            }
+          });
       } else {
-          this.loadData(this.config);
+        this.loadData(config);
       }
     },
+    isNumeric(num){
+      return !isNaN(num)
+    },
+    getData() {
+      var pathname = window.location.pathname.substring(1);
+      var address = window.location.hostname;
+      axios.get(
+          'https://edgeryders.eu/t/13671.json'
+          ).then(({ data }) => {
+            var directories = this.getYaml(data.post_stream.posts[0].cooked);
+            window.console.log(directories);
+            var result = directories.filter(x => x.alias == pathname || x.id == pathname || x.domain == address)[0];
+            window.console.log(address);
+            if (result && result.id) {
+              try {
+                this.remoteConfig(result.id);
+              }
+              catch(e) {
+                this.localConfig();
+              }
+            } else if (pathname && this.isNumeric(pathname)) {
+              try {
+                this.remoteConfig(pathname);
+              }
+              catch(e) {
+                this.localConfig();
+              }
+            } else {
+              this.localConfig();
+            }
+          });
+    },
     loadData(data){
+
       if (this.overrideStyle) {
         this.getUrlStyle(data.style);
       } else {
@@ -96,7 +143,9 @@ export default {
       if (data.template) {
         this.$globals.template = data['template'];
       }
+      if (data.style && data.style.fonts) {
       this.loadFonts(data.style.fonts);
+      }
       this.getNavElements(data.blocks);
     },
     getEvent(){
@@ -107,8 +156,8 @@ export default {
         var navArray = sections.map(function(el) {
           if (el.id) {
             return {
-              title: el.title,
-              id: el.id,
+              text: el.id,
+              url: '#' + el.id
             } 
           }
         });
@@ -124,16 +173,41 @@ export default {
         },
       });
     },
+    validateJson(str) {
+      try {
+        JSON.parse(str);
+      } catch (e) {
+        return false;
+      }
+      return true;
+    },
+    validateYaml(str) {
+      try {
+        YAML.parse(str);
+      } catch (e) {
+        return false;
+      }
+      return true;
+    },
   	getJson(value) {
     	const doc = new DOMParser().parseFromString(value, "text/html");
     	var json = [...doc.querySelectorAll('code')].map(code => code.textContent);
     	var final = String(json).replace(/\n/g, " ");
-    	if (final !== '') {
+    	if (this.validateJson(final)) {
     		var obj = JSON.parse(final);
-    		return obj;
+        return obj;
     	} else {
-    		return null
+    		return false
     	}
+    },
+    getYaml(value) {
+      const doc = new DOMParser().parseFromString(value, "text/html");
+      var yaml = [...doc.querySelectorAll('code')].map(code => code.textContent);
+      if (this.validateYaml(yaml[0])) {
+        return YAML.parse(yaml[0]);
+      } else {
+        return false
+      }
     },
     MediaQueryIndex() {
       var index = 0;

@@ -11,7 +11,8 @@ export const bus = new Vue();
 
 export const globalStore = new Vue({
   data: {
-    globalvar: 'global hello world'
+    globalvar: 'global hello world',
+    ready: false
   }
 });
 Vue.prototype.$globals = globalStore;

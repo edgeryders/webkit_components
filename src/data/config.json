@@ -4,7 +4,7 @@
     "baseUrl": "https://edgeryders.eu"
   },
   "style": {
-    "fonts": ["Ubuntu:400,500,700,800,900", "Inconsolata:200,500", "Playfair+Display"],
+    "fonts": ["Ubuntu:400,500,700,800,900", "Inconsolata:200,500"],
     "title": {
       "width": ["90%", "75%"],
       "padding": ["0 0 10px"],
@@ -172,7 +172,7 @@
       },
       "views": [
         {
-          "text": ["<p class='md:pt-2'><b>This is html content.</b> Text can be broken into multiple paragraphs</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</p>", "<ul class='p-6 rounded-lg border'><li class='pb-4'>To see how inline styling works, check out the <a href='/guide/styling'>Styling</a> section of the guide</li><li class='border-gray-200 border-t py-4'>WebKit can render <b>inline css</b> as well as <b>Tailwind</b> css classes</li><li class='border-gray-200 border-t pt-4'>So you are flexible to style individual elements within the configuration</li></ul>"],
+          "text": ["<p><b>This is html content.</b> Text can be broken into multiple paragraphs</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</p>", "<ul class='p-6 rounded-lg border bg-white'><li class='pb-4'>To see how inline styling works, check out the <a href='/guide/styling'>Styling</a> section of the guide</li><li class='border-gray-200 border-t py-4'>WebKit can render <b>inline css</b> as well as <b>Tailwind</b> css classes</li><li class='border-gray-200 border-t pt-4'>So you are flexible to style individual elements within the configuration</li></ul>"],
           "style": {
             "font-size": ["16px"],
             "line-height": ["25px"]
@@ -186,7 +186,7 @@
           }
         },
         {
-          "text": "<h3 class='font-bold text-lg border-b pb-2'>Child Blocks</h3><p class='highlight'>The <b>Content Block</b> can render multiple <b>Views</b> as child components.</p><p class='highlight pt-2'>In this example we have the <b>Form View</b> next to a <b>Text View</b>, both rendered as child components of the Content Block.</p>",
+          "text": "<h3 class='font-bold text-lg border-b pb-2 mb-3'>Child Blocks</h3><p class='highlight'>The <b>Content Block</b> can render multiple <b>Views</b> as child components.</p><p class='highlight pt-2'>In this example we have the <b>Form View</b> next to a <b>Text View</b>, both rendered as child components of the Content Block.</p>",
           "form": {
             "config": {
               "createTopic": true,

@@ -11,7 +11,7 @@
 import axios from "axios";
 
 export default {
-  props: ["data", "mq", "stylesheet"],
+  props: ["data", "stylesheet"],
   data() {
     return { content: null, post: false };
   },
@@ -21,11 +21,15 @@ export default {
     }
   },
   created() {
-     if (this.isNumeric(this.data)) {
+     if (this.isNumeric(this.data) || this.data.includes('/') && this.isNumeric(this.data.split('/')[0])) {
+      var postIndex = 0;
+      if (typeof(this.data) == 'string') {
+        postIndex = this.data.split('/')[1] - 1;
+      }
       axios.get(
         `${this.$globals.config.baseUrl}/t/${this.data}.json`
       ).then(({ data }) => {
-        this.content = data.post_stream.posts[0].cooked;
+        this.content = data.post_stream.posts[postIndex].cooked;
         this.post = true;
       });
      } else {
@@ -64,6 +68,12 @@ export default {
 }
 }
 
+.text {
+  p, h3 {
+    @apply mb-3;
+  }
+}
+
 .post {
     h1, h2, h3, h4, h5 {
       @apply font-bold block w-full m-0 p-0;
@@ -75,13 +85,17 @@ export default {
       @apply mb-2 text-2xl;
     }
     h3 {
-      @apply block text-xl mb-2;
+      @apply block text-xl mb-2 mt-3;
     }
     p {
       @apply w-full inline-block mb-3;
     }
     blockquote {
-      @apply bg-gray-200 p-5 pl-6 border-l-2 my-3 border-gray-300;
+      @apply bg-gray-200 p-5 pl-6 my-4 border-gray-300 border-l-2;
+      p {
+        margin: 0;
+        padding: 0;
+      }
     }
     img {
         @apply block;
@@ -89,6 +103,17 @@ export default {
         @apply my-0 float-left mr-1;
         width: 20px;
       }
+    }
+    ol {
+      @apply ml-8 mb-3;
+      list-style: decimal;
+    }
+    ul {
+      @apply ml-6 mb-3;
+      list-style: circle;
+    }
+    a {
+      @apply font-bold underline;
     }
 
 }

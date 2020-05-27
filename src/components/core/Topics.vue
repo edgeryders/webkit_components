@@ -13,7 +13,7 @@
     </div>
     <div v-for="(view, index) in data.views" :key="index">
 
-              <TextView v-if="view.text" class="wrapper md:wrapper-md py-4 pb-2 mx-auto" :style="elementStyle(view.style, 'wrapper')" :data="view.text" />
+              <TextView v-if="view.text && ready" class="wrapper md:wrapper-md py-4 pb-2 mx-auto" :stylesheet="view.style" :data="view.text" />
 
               <Slider
                 v-if="topics && view.slider && activeView == 'slider' && ready"
@@ -52,8 +52,6 @@
 
                 </template>
               </Grid>
-
-             
 
           <List v-if="topics && view.list && activeView == 'list' && ready" :data="topics" :config="view.list">
             <template v-slot:item="{ item }">
@@ -154,7 +152,7 @@ export default {
     },
     getTopics(value, filter) {
       axios.get(
-        `${this.config.baseUrl}/${filter}/${value}.json`
+        `${this.baseUrl}/${filter}/${value}.json`
       ).then(({ data }) => {
         var topics = data.topic_list.topics;
         if (this.data.sort_by) {

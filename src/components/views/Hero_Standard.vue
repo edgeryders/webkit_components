@@ -85,9 +85,14 @@ export default {
 }
 
 .hero_actions {
-  @apply flex mt-4;
+  @apply flex pt-3;
   a {
-    @apply text-lg;
+    @apply text-sm p-3 rounded-sm;
+    font-size: 14px;
+    &:hover {
+      @apply bg-gray-300;
+      background: #efefef !important;
+    }
   }
 }
 
