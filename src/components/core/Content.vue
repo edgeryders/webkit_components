@@ -1,10 +1,11 @@
 <template>
-  <div class="block md:block-md" :style="containerStyle(data.style)">
+  <div class="block md:block-md" :style="elementStyle(data.style.container, 'container')" :class="elementClass(data.style.container.class)">
     <div
       class="wrapper md:wrapper-md mx-auto"
-      :style="wrapperStyle(data.style)"
+      :style="elementStyle(data.style.wrapper, 'wrapper')" 
+      :class="elementClass(data.style.container.wrapper)"
     >
-      <div class="flex w-full" :style="textStyle('title', data.style)" :class="data.style && data.style.title && data.style.title.class" v-if="data.title" >
+      <div class="flex w-full" :style="textStyle('title', data.style)" :class="elementClass(data.style.title.class, 'title')" v-if="data.title" >
         <h3 :class="titleClassSize(data.style)" class="leading-tight w-full md:leading-normal">{{ data.title }}</h3>
       </div>
       <div class="w-full">

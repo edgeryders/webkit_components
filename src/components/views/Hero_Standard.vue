@@ -1,21 +1,6 @@
 <template>
-    <div class="hero_standard content_wrapper md:content_wrapper-md w-full" :style="wrapperStyle(data.style)" >
-      <div class="hero_image md:hero_image-md" v-if="data.image" :style="getImageWidth(data.image.width)">
-        {{getImageWidth(data.image.width)}}
-      </div>
-      <div class="hero_content md:hero_content-md">
-        <div class="hero_title flex flex-col md:hero_title-md">
-          <h1 v-if="data.title" :class="getClass('title', data.style)" contenteditable  @blur="event => onInput(event, 'title')" :style="textStyle('title', data.style)" v-html="data.title"></h1>
-          <h3 v-if="data.subtitle" :style="textStyle('subtitle', data.style)"  :class="getClass('subtitle', data.style)" v-html="data.subtitle"></h3>
-        </div>
-        <div class="hero_description" contenteditable  @blur="event => onInput(event, 'text.content')" v-html="data.text.content" :style="textStyle('paragraph', data.style)"></div>
-        <div class="hero_actions md:hero_actions-md">
-            <a v-for="item in data.text.buttons" :style="uiStyle('action', data.style)" :class="data.style.action.class[0]" :href="item.url" :key="item.url">
-              {{item.text}}
-            </a>
-        </div>
-      </div>
-
+    <div class="hero_standard content_wrapper md:content_wrapper-md w-full" :style="elementStyle(data.style, 'wrapper')" >
+     {{elementStyle(data.style, 'wrapper')}}
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="hero_standard md:hero_standard-md" :style="wrapperStyle(data.style)" :class="getClass('wrapper', data.style)">
+    <div class="hero_standard md:hero_standard-md" :style="elementStyle(data.style.wrapper, 'wrapper')" :class="elementClass(data.style.wrapper.class)">
       <div class="hero_image md:hero_image-md" v-if="data.image" :style="getImageWidth(data.image.width)">
         <img :src="data.image.url" />
       </div>

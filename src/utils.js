@@ -3,8 +3,6 @@ import WebFontLoader from 'webfontloader';
 var YAML = require('yamljs');
 import axios from "axios";
 
-
-
 export default {
   data: function() {
     return {
@@ -400,6 +398,26 @@ export default {
       }
       return styleObj;
     },
+    elementClass(array, element) {
+      var index = this.MediaQueryIndex();
+      if (array) {
+        if (index !== 0 && array.length > 1) {
+          return array[index]
+        }
+        else {
+          return array[0]
+        }
+      } else if (element) {
+        if (index !== 0 && this.globalStyle[element] && this.globalStyle[element]['class']) {
+          return this.globalStyle[element]['class'][index]
+        }
+        else {
+          return this.globalStyle[element]['class'][0]
+        }
+      } else {
+        return null
+      }
+    },
     customUiStyle(style, ui) {
       if (style && style[ui]) {
 
@@ -420,7 +438,7 @@ export default {
     },
     titleClassSize(style) {
       this.sectionStyle = style;
-      return this.applyStyle('title', 'size')
+      return this.applyStyle('title', 'class')
     },
     getPermalink(slug) {
       return this.$globals.config.baseUrl + '/t/' + slug;

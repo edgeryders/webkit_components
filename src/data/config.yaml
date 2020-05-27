@@ -10,7 +10,7 @@ style:
     align: [left]
     font: [Ubuntu]
     weight: ['600']
-    size: [text-2xl, text-3xl]
+    class: ["text-2xl", "text-3xl"]
 blocks:
 - type: Header
   config:
@@ -30,13 +30,18 @@ blocks:
         template: standard
       style:
         wrapper:
-          width: [90%, 65%]
-          padding: [20px 10px, 70px 0]
+          width: [90%, 80%]
+          margin: [0 auto]
+          padding: [20px 10px, 40px 30px]
+          class: ["rounded-lg"]
+          font-family: ["Helvetica"]
+        title:
+          font: ["Ubuntu"]
         button:
           background: [white]
           color: [black]
           class: [border-b border-gray-300 py-2 font-bold mr-4 text-sm]
-      title: Webkit Sandbox 2
+      title: Webkit Sandbox 4
       text: This is the sandbox site for Webkit. Enter a topic_id with a valid configuration
         to preview your site.
       image:
@@ -63,8 +68,7 @@ blocks:
     paragraph:
       weight: ['400']
     container:
-      padding: [10px 0 20px, '0']
-      background: ['rgba(0,0,0,0.03)']
+      padding: [10px 0 20px, '50px 0px']
     button:
       background: [white]
       color: [black]
@@ -77,6 +81,8 @@ blocks:
 - type: Content
   id: about
   style:
+    container:
+      background: ["linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100%)"]
     wrapper:
       width: [100%, 80%]
       padding: ['0', 30px 0px]
