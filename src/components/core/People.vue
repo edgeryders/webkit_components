@@ -1,7 +1,7 @@
 <template>
   <div class="section md:section-md" :style="containerStyle(data.style)">
     <div class="flex justify-between items-center p-0 m-0 mx-auto" v-if="data.title && $mq=='md'" :style="textStyle('title', data.style)">
-      <h3 class="text-3xl" :class="titleClassSize(data.style)">{{ data.title }}</h3>
+      <h3 :class="titleClassSize(data.style)">{{ data.title }}</h3>
       <div class="toggle_menu">
           <div
           class="toggle previous"

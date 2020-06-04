@@ -1,19 +1,19 @@
 <template>
-  <div class="block md:block-md" :style="elementStyle(data.style.container, 'container')" :class="elementClass(data.style.container.class)">
+  <div class="block md:block-md" :style="containerStyle(data.style)">
     <div
       class="wrapper md:wrapper-md mx-auto"
-      :style="elementStyle(data.style.wrapper, 'wrapper')" 
-      :class="elementClass(data.style.container.wrapper)"
+      :style="wrapperStyle(data.style)"
     >
-      <div class="flex w-full text-3xl" :style="textStyle('title', data.style)" :class="elementClass(data.style.title.class, 'title')" v-if="data.title" >
-        <h3 class="leading-tight w-full md:leading-normal">{{ data.title }}</h3>
+      <div class="flex w-full" :style="textStyle('title', data.style)" :class="data.style && data.style.title && data.style.title.class" v-if="data.title" >
+        <h3 :class="titleClassSize(data.style)" class="leading-tight w-full md:leading-normal">{{ data.title }}</h3>
       </div>
       <div class="w-full">
         <div v-for="(view, index) in data.views" :key="index" class="content_block md:content_block-md">
               <ImageView v-if="view.image" :mq="viewport" :data="view.image" />    
               <TextView v-if="view.text" :mq="viewport" :data="view.text" :stylesheet="view.style" />
-              <VideoView v-if="view.video" :mq="viewport" :data="view.video" :stylesheet="view.style" />
               <FormView v-if="view.form" :mq="viewport" :data="view.form" />
+              <VideoView v-if="view.video" :mq="viewport" :data="view.video" :stylesheet="view.style" />
+
         </div>
       </div>
   </div>
@@ -23,8 +23,8 @@
 <script>
 import TextView from "@/components/views/Text.vue";
 import ImageView from "@/components/views/Image.vue";
-import VideoView from "@/components/views/Video.vue";
 import FormView from "@/components/views/Form.vue";
+import VideoView from "@/components/views/Video.vue";
 
 export default {
   props: ["data", "html", "stylesheet", "globalStyle"],
