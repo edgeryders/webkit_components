@@ -1,5 +1,5 @@
 <template>
-  <div class="block_text md:block_text-md" >
+  <div class="block_text md:block_text-md w-full" >
     <div v-if="Array.isArray(content)" class="text_container md:text_container-md">
       <div v-for="(text, index) in content" v-html="text" class="text" :style="elementStyle(stylesheet, 'text')" :key="index"></div>
     </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="section md:section-md" :style="containerStyle(data.style)">
     <div class="flex font-bold justify-between items-center mx-auto" v-if="data.title" :style="textStyle('title', data.style)" >
-      <h3 class="m-0 p-0 w-full" :class="titleClassSize(data.style)">{{ data.title }}</h3>
+      <h3 class="text-3xl m-0 p-0 w-full" :class="titleClassSize(data.style)">{{ data.title }}</h3>
       <div class="toggle_menu" v-if="data.views && data.views.length">
         <div v-for="(view, index) in getViews(data.views)"
           class="toggle"

@@ -179,7 +179,7 @@
           }
         },
         {
-          "image": [{"url": "https://i.pinimg.com/originals/15/5c/bc/155cbc2717684aa8285538b7e04b3000.jpg", "size": "300px"}],
+          "video": [{"youtube": "G_DoEa3lcBE", "height": "300px"}, {"vimeo": "410087848", "height": "350px"}],
           "text": 13659,
           "style": {
             "padding": ["0", "0 10px"]

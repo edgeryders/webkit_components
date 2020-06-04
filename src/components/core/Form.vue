@@ -2,7 +2,7 @@
   <div class="section w-full mt-6 mb-6 md:section-md" :style="[textStyle('paragraph', data.style), containerStyle(data.style)]" id="form">
     <div class="md:flex flex-col mx-auto items-start" :style="wrapperStyle(data.style)">
       <div class="w-full">
-        <h3 :class="titleClassSize(data.style)" :style="textStyle('title', data.style)">{{ data.title }}</h3>
+        <h3 class="text-3xl" :class="titleClassSize(data.style)" :style="textStyle('title', data.style)">{{ data.title }}</h3>
         <div :class="getClass('paragraph', data.style)" :style="textStyle('paragraph', data.style)" v-html="data.content">
         </div>
       </div>

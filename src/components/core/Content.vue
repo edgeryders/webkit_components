@@ -5,13 +5,14 @@
       :style="elementStyle(data.style.wrapper, 'wrapper')" 
       :class="elementClass(data.style.container.wrapper)"
     >
-      <div class="flex w-full" :style="textStyle('title', data.style)" :class="elementClass(data.style.title.class, 'title')" v-if="data.title" >
-        <h3 :class="titleClassSize(data.style)" class="leading-tight w-full md:leading-normal">{{ data.title }}</h3>
+      <div class="flex w-full text-3xl" :style="textStyle('title', data.style)" :class="elementClass(data.style.title.class, 'title')" v-if="data.title" >
+        <h3 class="leading-tight w-full md:leading-normal">{{ data.title }}</h3>
       </div>
       <div class="w-full">
         <div v-for="(view, index) in data.views" :key="index" class="content_block md:content_block-md">
               <ImageView v-if="view.image" :mq="viewport" :data="view.image" />    
               <TextView v-if="view.text" :mq="viewport" :data="view.text" :stylesheet="view.style" />
+              <VideoView v-if="view.video" :mq="viewport" :data="view.video" :stylesheet="view.style" />
               <FormView v-if="view.form" :mq="viewport" :data="view.form" />
         </div>
       </div>
@@ -22,6 +23,7 @@
 <script>
 import TextView from "@/components/views/Text.vue";
 import ImageView from "@/components/views/Image.vue";
+import VideoView from "@/components/views/Video.vue";
 import FormView from "@/components/views/Form.vue";
 
 export default {
@@ -29,6 +31,7 @@ export default {
   components: {
     TextView,
     ImageView,
+    VideoView,
     FormView
   },
   methods: {
