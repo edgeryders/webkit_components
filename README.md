@@ -1,4 +1,6 @@
-# Edgeryders Webkit
+# Edgeryders Webkit (0.5)
+
+This version of the webkit uses the JSON configuration syntax. PLease refer to the webkit repository for XML configurations, which we will be using for most sites - [here](https://github.com/edgeryders/webkit).
 
 A library of Vue components for displaying content from Discourse.
 
